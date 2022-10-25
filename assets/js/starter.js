@@ -130,65 +130,101 @@ import "../../node_modules/jquery/dist/jquery.min.js";
 import "../../node_modules/bootstrap/js/dist/util.js";
 import "../../node_modules/bootstrap/js/dist/modal.js";
 
-$(document).ready(function () {
-  UpdateEmpRec();
-  //console.log(Employees);
-  $("#pre1").html(JSON.stringify(Employees, null, "\t"));
-});
 /**
  * @name UpdateEmpRec
  * @function
- * @return {void}
+ * @param {String} year
+ * @return {Promise}
  *  Creates new properties on Employees Object to store calculated values
  */
-const UpdateEmpRec = () => {
+const UpdateEmpRecs = async (year) => {
   // Setting a constant for date given
   const CurDate = new Date("1/1/2014");
   // Get the year to use in calculating days to bday later
   const CurYear = CurDate.getFullYear();
   // Get Current month in case we need to roll year up later
   const CurMonth = CurDate.getMonth() + 1;
-  //console.log(Employees);
-  //console.log(CurDate);
+  // Track total sales for department manager totals
+  let managerSaleTotals = { supervisor: { 3: { amount: 0 } } };
   // Loop through the employees
   for (const Emp of Employees) {
     try {
       // Update Emp object with days until birthday
-      Q1_CalcDaysToBDay(Emp, { CurDate, CurMonth, CurYear });
-      Q2_SetBestCustomer(Emp);
+      // Also set the best customer for the employee
+      // We can do this concurrently using promise all
+      const Results = await Promise.all([
+        Q1_CalcDaysToBDay(Emp, { CurDate, CurMonth, CurYear }),
+        Q2_SetBestCustomer(Emp, year),
+      ]);
+      Emp.daystobday = Results[0];
+      Emp.bestcustomer = Results[1];
+      // Get employee supervisor to assign sales to
+      const Supervisor = Emp.supervisor;
+
+      try {
+        if (Supervisor !== "")
+          managerSaleTotals.supervisor[Supervisor].amount += Number(Emp[year]);
+      } catch (err) {
+        console.error(err);
+      }
     } catch (err) {
       // Log error and keep proceeding with loop
       console.error(err);
     }
   }
+  // Update managers 2013 sales
+  const Managers = Employees.filter((emp) => {
+    for (const Manager in managerSaleTotals.supervisor) {
+      if (!managerSaleTotals.supervisor.hasOwnProperty(Manager)) return false;
+      if (emp.supervisor === "") return true;
+    }
+  });
+  console.log(Managers);
+  Managers.some((manager) => {
+    const ManagerId = manager.internalid;
+    if (!managerSaleTotals.supervisor.hasOwnProperty(ManagerId)) return false;
+    manager[year] = managerSaleTotals.supervisor[ManagerId].amount.toFixed(2);
+    return true;
+  });
 };
 /**
  * @name Q2_SetBestCustomer
  * @function
  * @param {Employees} emp
+ * @param {String} year
+ * @return {String}
  */
-const Q2_SetBestCustomer = (emp) => {
-  // Loop through the list of employees and filter down their best sale
-  // Map down a new array of highest sales for each employee
-  const EmpSales = Revenue2013.filter(
-    (sale) => sale.Employee == emp.internalid
-  );
-  // If there are no sales we can leave, nothing to do here
-  if (EmpSales.length <= 0) return;
-  // find the order with the highest sale dollar
-  const BestSale = EmpSales.reduce(
-    (previousValue, currentValue) => {
-      // Force number type since amounts are returning as strings
-      const MaxNum = Math.max(
-        Number(previousValue.amount),
-        Number(currentValue.amount)
-      );
-      return MaxNum == currentValue.amount ? currentValue : previousValue;
-    },
-    { amount: 0 }
-  );
-  // Set the bestcustomer property for the Employee object
-  emp.bestcustomer = BestSale.customer;
+const Q2_SetBestCustomer = async (emp, year) => {
+  try {
+    // Loop through the list of employees and filter down their best sale
+    // Map down a new array of highest sales for each employee
+    const EmpSales = Revenue2013.filter(
+      (sale) => sale.Employee == emp.internalid
+    );
+    // Update the employee record with yearly sales total
+    UpdateSalesTotals(year, EmpSales, emp);
+    // If there are no sales we can leave, nothing to do here
+    if (EmpSales.length <= 0) {
+      // No sales found, set best customer as not applicable
+      return "N/A";
+    }
+    // find the order with the highest sale dollar
+    const BestSale = EmpSales.reduce(
+      (previousValue, currentValue) => {
+        // Force number type since amounts are returning as strings
+        const MaxNum = Math.max(
+          Number(previousValue.amount),
+          Number(currentValue.amount)
+        );
+        return MaxNum == currentValue.amount ? currentValue : previousValue;
+      },
+      { amount: 0 }
+    );
+    // Return the bestcustomer property for the Employee object
+    return BestSale.customer;
+  } catch (err) {
+    console.error(err);
+  }
 };
 /**
  * @typedef current
@@ -201,11 +237,12 @@ const Q2_SetBestCustomer = (emp) => {
 /**
  *
  *
+ * @function
  * @param {Employees} emp
  * @param {current} current
  * @return {void}
  */
-const Q1_CalcDaysToBDay = (emp, current) => {
+const Q1_CalcDaysToBDay = async (emp, current) => {
   // Use property daystobday to store this date on the employee object
   // Use property birthdate to calculate days until emp birthday
   // Convert birthdate property into date
@@ -217,8 +254,62 @@ const Q1_CalcDaysToBDay = (emp, current) => {
     BirthMonth > current.CurMonth ? current.CurYear : current.CurYear + 1;
   // Create a new date object for next birthday
   const NextBDay = new Date(`${BirthMonth}/${BirthDay}/${NextBDayYear}`);
-  // Set new property daystobday for employee object with days remaining until bday according to dates provided
-  emp.daystobday = Math.ceil(
+  // return new property daystobday for employee object with days remaining until bday according to dates provided
+  return Math.ceil(
     (NextBDay.getTime() - current.CurDate.getTime()) / (1000 * 3600 * 24)
   );
 };
+/**
+ * @typedef sales
+ * @type {Array.<{amount: Number}>}
+ * @property {Number} amount - sale amount.
+ */
+/** @type {sales} */
+/**
+ *
+ * @name UpdateSalesTotals
+ * @function
+ * @param {String} year
+ * @param {sales} sales
+ * @param {Employees} emp
+ * @return {Number}
+ */
+const UpdateSalesTotals = (year, sales, emp) => {
+  // Use property "2013 Revenue" to store this date on the employee object
+  emp[year] = sales
+    .reduce(
+      (prevSale, curSale) => {
+        return {
+          amount: prevSale.amount
+            ? Number(prevSale.amount) + Number(curSale.amount)
+            : Number(curSale.amount),
+        };
+      },
+      { amount: 0 }
+    )
+    .amount.toFixed(2);
+  // Return the total set so we can add them all up for the manager totals
+  return emp[year];
+};
+
+/**
+ * @name RenderResults
+ * @function
+ * @return {void}
+ *
+ */
+const RenderResults = (content, selector) => {
+  $(selector).html(JSON.stringify(content, null, "\t"));
+};
+
+// init business logic asynchronously
+(async () => {
+  await UpdateEmpRecs("2013 Revenue");
+  // If the dom is already drawn, we want to just render now
+  if (document.readyState === "complete")
+    return RenderResults(Employees, "pre#pre1");
+  $(document).ready(function () {
+    // Document is ready to draw on, call render functions to update dom
+    RenderResults(Employees, "pre#pre1");
+  });
+})();
