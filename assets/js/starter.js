@@ -67,38 +67,89 @@ const Revenue2013 = [
     customer: "Franklin",
     Employee: "1",
     amount: "50000.00",
+    saledate: "9/21/2013",
   },
-  { type: "invoice", customer: "Gabby", Employee: "1", amount: "25000.00" },
-  { type: "invoice", customer: "Harry", Employee: "1", amount: "30000.00" },
+  {
+    type: "invoice",
+    customer: "Gabby",
+    Employee: "1",
+    amount: "25000.00",
+    saledate: "8/11/2013",
+  },
+  {
+    type: "invoice",
+    customer: "Harry",
+    Employee: "1",
+    amount: "30000.00",
+    saledate: "5/13/2013",
+  },
   {
     type: "invoice",
     customer: "Ingrid",
     Employee: "2",
     amount: "75000.00",
   },
-  { type: "invoice", customer: "Jacob", Employee: "2", amount: "60000.00" },
-  { type: "invoice", customer: "Kelly", Employee: "4", amount: "30000.00" },
-  { type: "invoice", customer: "Lamar", Employee: "4", amount: "40000.00" },
-  { type: "invoice", customer: "Mary", Employee: "4", amount: "20000.00" },
+  {
+    type: "invoice",
+    customer: "Jacob",
+    Employee: "2",
+    amount: "60000.00",
+    saledate: "11/1/2013",
+  },
+  {
+    type: "invoice",
+    customer: "Kelly",
+    Employee: "4",
+    amount: "30000.00",
+    saledate: "11/21/2013",
+  },
+  {
+    type: "invoice",
+    customer: "Lamar",
+    Employee: "4",
+    amount: "40000.00",
+    saledate: "12/12/2013",
+  },
+  {
+    type: "invoice",
+    customer: "Mary",
+    Employee: "4",
+    amount: "20000.00",
+    saledate: "10/3/2013",
+  },
   {
     type: "invoice",
     customer: "Nicole",
     Employee: "4",
     amount: "70000.00",
+    saledate: "12/13/2013",
   },
-  { type: "invoice", customer: "Oscar", Employee: "5", amount: "75000.00" },
+  {
+    type: "invoice",
+    customer: "Oscar",
+    Employee: "5",
+    amount: "75000.00",
+    saledate: "2/10/2013",
+  },
   {
     type: "invoice",
     customer: "Patrick",
     Employee: "5",
     amount: "80000.00",
   },
-  { type: "invoice", customer: "Quin", Employee: "5", amount: "60000.00" },
+  {
+    type: "invoice",
+    customer: "Quin",
+    Employee: "5",
+    amount: "60000.00",
+    saledate: "7/23/2013",
+  },
   {
     type: "invoice",
     customer: "Rachel",
     Employee: "5",
     amount: "100000.00",
+    saledate: "12/28/2013",
   },
 ];
 
@@ -162,8 +213,9 @@ const UpdateEmpRecs = async () => {
       ]);
       Emp.daystobday = Results[0];
       Emp.bestcustomer = Results[1];
-      Q4_SetCommissions(Emp, Current);
       // Now that we know the best customer, we can calculate how long it has been since they purchased an order
+      Q4_SetCommissions(Emp, Current);
+      Q5_DaysSinceSale(Emp, Current);
 
       // Get employee supervisor to assign sales to
       const Supervisor = Emp.supervisor;
@@ -177,11 +229,48 @@ const UpdateEmpRecs = async () => {
     }
   }
   try {
+    // Now that we are done calculating the employee sale totals, we can update the manager totals
     Q3P2_UpdateSalesTotals(managerSaleTotals, Current);
   } catch (err) {
     console.error(err);
   }
 };
+/**
+ * @name Q5_DaysSinceSale
+ * @function
+ * @param {Employees} emp
+ * @param {Current} Current
+ * @return {String}
+ */
+const Q5_DaysSinceSale = (emp, Current) => {
+  // Calculate the last sale date from order list
+  const LastSaleDate = Revenue2013.reduce(
+    (prevDate, curDate) => {
+      if (emp.internalid !== curDate.Employee) return prevDate;
+      const SaleDate = new Date(curDate.saledate);
+      return {
+        saledate: prevDate.saledate > SaleDate ? prevDate.saledate : SaleDate,
+      };
+    },
+    { saledate: new Date(Current.PrevCommYear) }
+  );
+  // Calculate number of days since last sale
+  const PrevSaleDate = LastSaleDate.saledate;
+  const DaysSinceSale = Math.floor(
+    (Current.CurDate - PrevSaleDate) / (1000 * 3600 * 24)
+  );
+  emp.dayssincesale = DaysSinceSale ? DaysSinceSale : "N/A";
+  emp.lastsaledate = emp.dayssincesale.startsWith("N/A")
+    ? emp.dayssincesale
+    : PrevSaleDate.toDateString();
+};
+/**
+ * @name Q4_SetCommissions
+ * @function
+ * @param {Employees} emp
+ * @param {Current} Current
+ * @return {String}
+ */
 const Q4_SetCommissions = (emp, Current) => {
   const EmpCommissionRules = CommissionRules.filter(
     (rule) => rule.employee == emp["internalid"]
@@ -305,7 +394,7 @@ const Q2_SetBestCustomer = async (emp, year) => {
 /**
  * @typedef Current
  * @type {object}
- * @property {Date} CurDate - current Day.
+ * @property {Date} CurDate - current Date.
  * @property {Date} CurMonth - current Month
  * @property {Date} CurYear - current Year
  * @property {Number} PrevCommYear - previous commission Year
