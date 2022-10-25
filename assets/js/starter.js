@@ -133,17 +133,21 @@ import "../../node_modules/bootstrap/js/dist/modal.js";
 /**
  * @name UpdateEmpRec
  * @function
- * @param {String} year
+ * @param {Number} year
  * @return {Promise}
  *  Creates new properties on Employees Object to store calculated values
  */
-const UpdateEmpRecs = async (year) => {
+const UpdateEmpRecs = async () => {
   // Setting a constant for date given
   const CurDate = new Date("1/1/2014");
   // Get the year to use in calculating days to bday later
   const CurYear = CurDate.getFullYear();
+  // Set prev year vars used for calculating commissions
+  const PrevCommYear = `${CurYear - 2} Revenue`;
+  const CurrCommYear = `${CurYear - 1} Revenue`;
   // Get Current month in case we need to roll year up later
   const CurMonth = CurDate.getMonth() + 1;
+  const Current = { CurDate, CurMonth, CurYear, PrevCommYear, CurrCommYear };
   // Track total sales for department manager totals
   let managerSaleTotals = { supervisor: { 3: { amount: 0 } } };
   // Loop through the employees
@@ -153,25 +157,63 @@ const UpdateEmpRecs = async (year) => {
       // Also set the best customer for the employee
       // We can do this concurrently using promise all
       const Results = await Promise.all([
-        Q1_CalcDaysToBDay(Emp, { CurDate, CurMonth, CurYear }),
-        Q2_SetBestCustomer(Emp, year),
+        Q1_CalcDaysToBDay(Emp, Current),
+        Q2_SetBestCustomer(Emp, CurrCommYear),
       ]);
       Emp.daystobday = Results[0];
       Emp.bestcustomer = Results[1];
+      Q4_SetCommissions(Emp, Current);
+      // Now that we know the best customer, we can calculate how long it has been since they purchased an order
+
       // Get employee supervisor to assign sales to
       const Supervisor = Emp.supervisor;
-
-      try {
-        if (Supervisor !== "")
-          managerSaleTotals.supervisor[Supervisor].amount += Number(Emp[year]);
-      } catch (err) {
-        console.error(err);
-      }
+      if (Supervisor !== "")
+        managerSaleTotals.supervisor[Supervisor].amount += Number(
+          Emp[CurrCommYear]
+        );
     } catch (err) {
       // Log error and keep proceeding with loop
       console.error(err);
     }
   }
+  try {
+    Q3P2_UpdateSalesTotals(managerSaleTotals, Current);
+  } catch (err) {
+    console.error(err);
+  }
+};
+const Q4_SetCommissions = (emp, Current) => {
+  const EmpCommissionRules = CommissionRules.filter(
+    (rule) => rule.employee == emp["internalid"]
+  )[0];
+  const CommPercent = EmpCommissionRules.percentage.endsWith("%")
+    ? EmpCommissionRules.percentage.replace(/%/g, "")
+    : EmpCommissionRules.percentage;
+  // Calculate if Commissions Bonus qualifies
+  const BonusQualifies =
+    emp[Current.CurrCommYear] - emp[Current.PrevCommYear] > 0;
+  // Apply commissions to employee rec
+  emp["commission"] = emp[Current.CurrCommYear] * (CommPercent / 100);
+  // If bonus applies, set add the bonus amount to total commission
+  if (BonusQualifies) emp["commission"] += Number(EmpCommissionRules.bonus);
+  // Lock in commission at fixed point of 2 decimal places
+  emp["commission"] = emp["commission"].toFixed(2);
+};
+/**
+ * @typedef managerSaleTotals
+ * @type {object.<{supervisor:{amount: Number}}>}
+ * @property {Number} amount - sale amount.
+ */
+/** @type {managerSaleTotals} */
+/**
+ *
+ * @name Q3P2_UpdateSalesTotals
+ * @function
+ * @param {managerSaleTotals} managerSaleTotals
+ * @param {Current} Current
+ * @return {void}
+ */
+const Q3P2_UpdateSalesTotals = (managerSaleTotals, Current) => {
   // Update managers 2013 sales
   const Managers = Employees.filter((emp) => {
     for (const Manager in managerSaleTotals.supervisor) {
@@ -179,13 +221,47 @@ const UpdateEmpRecs = async (year) => {
       if (emp.supervisor === "") return true;
     }
   });
-  console.log(Managers);
   Managers.some((manager) => {
     const ManagerId = manager.internalid;
     if (!managerSaleTotals.supervisor.hasOwnProperty(ManagerId)) return false;
-    manager[year] = managerSaleTotals.supervisor[ManagerId].amount.toFixed(2);
+    manager[Current.CurrCommYear] =
+      managerSaleTotals.supervisor[ManagerId].amount.toFixed(2);
+    // Set Manager commissions
+    Q4_SetCommissions(manager, Current);
     return true;
   });
+};
+/**
+ * @typedef sales
+ * @type {Array.<{amount: Number}>}
+ * @property {Number} amount - sale amount.
+ */
+/** @type {sales} */
+/**
+ *
+ * @name UpdateSalesTotals
+ * @function
+ * @param {String} year
+ * @param {sales} sales
+ * @param {Employees} emp
+ * @return {Number}
+ */
+const Q3_UpdateSalesTotals = (year, sales, emp) => {
+  // Use property "2013 Revenue" to store this date on the employee object
+  emp[year] = sales
+    .reduce(
+      (prevSale, curSale) => {
+        return {
+          amount: prevSale.amount
+            ? Number(prevSale.amount) + Number(curSale.amount)
+            : Number(curSale.amount),
+        };
+      },
+      { amount: 0 }
+    )
+    .amount.toFixed(2);
+  // Return the total set so we can add them all up for the manager totals
+  return emp[year];
 };
 /**
  * @name Q2_SetBestCustomer
@@ -202,7 +278,7 @@ const Q2_SetBestCustomer = async (emp, year) => {
       (sale) => sale.Employee == emp.internalid
     );
     // Update the employee record with yearly sales total
-    UpdateSalesTotals(year, EmpSales, emp);
+    Q3_UpdateSalesTotals(year, EmpSales, emp);
     // If there are no sales we can leave, nothing to do here
     if (EmpSales.length <= 0) {
       // No sales found, set best customer as not applicable
@@ -227,22 +303,24 @@ const Q2_SetBestCustomer = async (emp, year) => {
   }
 };
 /**
- * @typedef current
+ * @typedef Current
  * @type {object}
- * @property {Date} CurDate - an ID.
- * @property {Date} CurMonth - your name.
- * @property {Date} CurYear - your age.
+ * @property {Date} CurDate - current Day.
+ * @property {Date} CurMonth - current Month
+ * @property {Date} CurYear - current Year
+ * @property {Number} PrevCommYear - previous commission Year
+ * @property {Number} CurrCommYear - current commission Year
  */
-/** @type {current} */
+/** @type {Current} */
 /**
  *
- *
+ * @name Q1_CalcDaysToBDay
  * @function
  * @param {Employees} emp
- * @param {current} current
+ * @param {Current} Current
  * @return {void}
  */
-const Q1_CalcDaysToBDay = async (emp, current) => {
+const Q1_CalcDaysToBDay = async (emp, Current) => {
   // Use property daystobday to store this date on the employee object
   // Use property birthdate to calculate days until emp birthday
   // Convert birthdate property into date
@@ -251,47 +329,14 @@ const Q1_CalcDaysToBDay = async (emp, current) => {
   const BirthDay = BirthDate.getDate();
   const BirthMonth = BirthDate.getMonth() + 1;
   const NextBDayYear =
-    BirthMonth > current.CurMonth ? current.CurYear : current.CurYear + 1;
+    BirthMonth > Current.CurMonth ? Current.CurYear : Current.CurYear + 1;
   // Create a new date object for next birthday
   const NextBDay = new Date(`${BirthMonth}/${BirthDay}/${NextBDayYear}`);
   // return new property daystobday for employee object with days remaining until bday according to dates provided
   return Math.ceil(
-    (NextBDay.getTime() - current.CurDate.getTime()) / (1000 * 3600 * 24)
+    (NextBDay.getTime() - Current.CurDate.getTime()) / (1000 * 3600 * 24)
   );
 };
-/**
- * @typedef sales
- * @type {Array.<{amount: Number}>}
- * @property {Number} amount - sale amount.
- */
-/** @type {sales} */
-/**
- *
- * @name UpdateSalesTotals
- * @function
- * @param {String} year
- * @param {sales} sales
- * @param {Employees} emp
- * @return {Number}
- */
-const UpdateSalesTotals = (year, sales, emp) => {
-  // Use property "2013 Revenue" to store this date on the employee object
-  emp[year] = sales
-    .reduce(
-      (prevSale, curSale) => {
-        return {
-          amount: prevSale.amount
-            ? Number(prevSale.amount) + Number(curSale.amount)
-            : Number(curSale.amount),
-        };
-      },
-      { amount: 0 }
-    )
-    .amount.toFixed(2);
-  // Return the total set so we can add them all up for the manager totals
-  return emp[year];
-};
-
 /**
  * @name RenderResults
  * @function
@@ -304,7 +349,7 @@ const RenderResults = (content, selector) => {
 
 // init business logic asynchronously
 (async () => {
-  await UpdateEmpRecs("2013 Revenue");
+  await UpdateEmpRecs();
   // If the dom is already drawn, we want to just render now
   if (document.readyState === "complete")
     return RenderResults(Employees, "pre#pre1");
