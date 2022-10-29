@@ -1,0 +1,15 @@
+{
+	"recommendations": [
+        "aaron-bond.better-comments",
+        "streetsidesoftware.code-spell-checker",
+        "codemooseus.vscode-devtools-for-chrome",
+        "yzhang.markdown-all-in-one",
+        "bierner.markdown-preview-github-styles",
+        "davidanson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
+        "oracle.suitecloud-vscode-extension",
+        "robole.markdown-snippets",
+        "stevencl.addDocComments",
+        "lici.require-js"
+    ]
+}
