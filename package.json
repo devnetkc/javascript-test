@@ -20,8 +20,11 @@
         "css-prefix": "postcss --replace assets/css/starter.css --use autoprefixer --map",
         "css-purge": "purgecss --keyframes --css assets/css/starter.css --content index.html \"node_modules/bootstrap/js/dist/{util,modal}.js\" --output assets/css/",
         "css": "npm-run-all css-compile css-prefix",
-        "docs": "jsdoc2md --template README.hbs ./assets/js/**/*[^.min].js > README.md",
+        "docs": "npm run docs-jsdocs | npm run docs-md",
+        "docs-md": "jsdoc2md --template README.hbs ./assets/js/**/*[^.min].js > README.md",
+        "docs-jsdocs": "jsdoc -c ./jsDocsConf.json",
         "server": "live-server --port=3000",
+
         "start": "npm-run-all --parallel watch server",
         "watch": "nodemon -e html,scss -x \"npm run css\"",
         "test": "npm run css-lint && npm run css"
@@ -45,6 +48,7 @@
         "@types/jquery": "^3.5.14",
         "autoprefixer": "^10.4.7",
         "jsdoc-to-markdown": "^7.1.1",
+        "jsdocs": "^1.0.0",
         "live-server": "^1.2.2",
         "node-sass": "^7.0.1",
         "nodemon": "^2.0.19",
