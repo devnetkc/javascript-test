@@ -9,9 +9,104 @@
 </head>
 
 <body>
-    <p id="p1"></p>
-    <pre id="pre1"></pre>
-    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <p><a target="_blank" href="docs/index.html" title="Project Documentation">Project Documentation</a> </p>
+    <div class="accordion" id="jsTests" role="tablist" aria-multiselectable="true">
+        <div class="card">
+            <div class="card-header" id="question1">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQuestion1" aria-expanded="false" aria-controls="collapseQuestion1">
+          Question 1 Result
+        </button>
+                </h2>
+            </div>
+
+            <div id="collapseQuestion1" class="collapse" aria-labelledby="question1" data-parent="#jsTests">
+                <div class="card-body">
+                    text text
+                    <pre id="result-Q1"></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" id="question1">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQuestion2" aria-expanded="false" aria-controls="collapseQuestion2">
+          Question 2 Result
+        </button>
+                </h2>
+            </div>
+
+            <div id="collapseQuestion2" class="collapse" aria-labelledby="question2" data-parent="#jsTests">
+                <div class="card-body">
+                    <pre id="result-Q2"></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" id="question3">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQuestion3" aria-expanded="false" aria-controls="collapseQuestion3">
+          Question 3 Result
+        </button>
+                </h2>
+            </div>
+
+            <div id="collapseQuestion3" class="collapse" aria-labelledby="question3" data-parent="#jsTests">
+                <div class="card-body">
+                    <pre id="result-Q3"></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" id="question4">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQuestion4" aria-expanded="false" aria-controls="collapseQuestion4">
+          Question 4 Result
+        </button>
+                </h2>
+            </div>
+
+            <div id="collapseQuestion4" class="collapse" aria-labelledby="question4" data-parent="#jsTests">
+                <div class="card-body">
+                    <pre id="result-Q4"></pre>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="question5p1">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQuestion5p1" aria-expanded="false" aria-controls="collapseQuestion5p1">
+          Question 5P1 Result
+        </button>
+                </h2>
+            </div>
+
+            <div id="collapseQuestion5p1" class="collapse" aria-labelledby="question5p1" data-parent="#jsTests">
+                <div class="card-body">
+                    <pre id="result-Q5P1"></pre>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="question5p2">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQuestion5p2" aria-expanded="false" aria-controls="collapseQuestion5p2">
+          Question 5P2 Result
+        </button>
+                </h2>
+            </div>
+
+            <div id="collapseQuestion5p2" class="collapse" aria-labelledby="question5p2" data-parent="#jsTests">
+                <div class="card-body">
+                    <pre id="result-Q5P2"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <pre id="pre1" class="hide"></pre>
     <script type="module" src="assets/js/init.min.js"></script>
 </body>
 
