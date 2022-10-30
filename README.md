@@ -80,20 +80,6 @@ Explain what tools were used during this practice - what program did you use to 
 
 ## Code Documentation
 
-## Modules
-
-<dl>
-<dt><a href="#module_cloud360">cloud360</a></dt>
-<dd></dd>
-</dl>
-
-## Constants
-
-<dl>
-<dt><a href="#LoadReadME">LoadReadME</a></dt>
-<dd></dd>
-</dl>
-
 <a name="module_cloud360"></a>
 
 ## cloud360
@@ -449,11 +435,6 @@ Object compiled of of yearly revenue streams associated by year as id
 | --- | --- | --- |
 | 2013 | <code>Array.&lt;Transaction&gt;</code> | Sales transactions for 2013 |
 
-<a name="LoadReadME"></a>
-
-## LoadReadME
-**Kind**: global constant  
-**Format**:   
 
 ## Copyright
 
