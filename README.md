@@ -80,6 +80,154 @@ Explain what tools were used during this practice - what program did you use to 
 
 ## Code Documentation
 
+## Modules
+
+<dl>
+<dt><a href="#module_cloud360-view">cloud360-view</a></dt>
+<dd></dd>
+<dt><a href="#module_cloud360">cloud360</a></dt>
+<dd></dd>
+</dl>
+
+<a name="module_cloud360-view"></a>
+
+## cloud360-view
+**Format**:   
+
+* [cloud360-view](#module_cloud360-view)
+    * [~RenderView](#module_cloud360-view..RenderView)
+        * [new RenderView(question, selector, parent)](#new_module_cloud360-view..RenderView_new)
+    * [~renderQ1(employees)](#module_cloud360-view..renderQ1) ⇒ <code>void</code>
+    * [~renderQ3(employees, p2)](#module_cloud360-view..renderQ3) ⇒ <code>void</code>
+    * [~renderQ4(employees)](#module_cloud360-view..renderQ4) ⇒ <code>void</code>
+    * [~renderQ5(employees)](#module_cloud360-view..renderQ5) ⇒ <code>void</code>
+    * [~renderPerformanceQ(employees, worst)](#module_cloud360-view..renderPerformanceQ) ⇒ <code>void</code>
+    * [~Record](#module_cloud360-view..Record) : <code>Object</code>
+    * [~Question](#module_cloud360-view..Question) : <code>Object</code>
+
+<a name="module_cloud360-view..RenderView"></a>
+
+### cloud360-view~RenderView
+**Kind**: inner class of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| title | <code>String</code> | Title for view |
+| question | <code>String</code> | Question shorthand title |
+| record | <code>Record</code> | Employee object records for question |
+
+<a name="new_module_cloud360-view..RenderView_new"></a>
+
+#### new RenderView(question, selector, parent)
+Holds view object for updated employee record and view
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| question | <code>Question</code> | Question object with its properties |
+| selector | <code>String</code> | jQuery selector string for dom element to update view on |
+| parent | <code>String</code> | Parent jQuery selector string for dom element updates |
+
+<a name="module_cloud360-view..renderQ1"></a>
+
+### cloud360-view~renderQ1(employees) ⇒ <code>void</code>
+Renders results for question 1
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+
+| Param | Type |
+| --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> | 
+
+<a name="module_cloud360-view..renderQ3"></a>
+
+### cloud360-view~renderQ3(employees, p2) ⇒ <code>void</code>
+Renders results for question 3
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> |  |  |
+| p2 | <code>boolean</code> | <code>false</code> | Calculate for managers instead |
+
+<a name="module_cloud360-view..renderQ4"></a>
+
+### cloud360-view~renderQ4(employees) ⇒ <code>void</code>
+Renders results for question 4
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+
+| Param | Type |
+| --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> | 
+
+<a name="module_cloud360-view..renderQ5"></a>
+
+### cloud360-view~renderQ5(employees) ⇒ <code>void</code>
+Renders results for question 5
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+
+| Param | Type |
+| --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> | 
+
+<a name="module_cloud360-view..renderPerformanceQ"></a>
+
+### cloud360-view~renderPerformanceQ(employees, worst) ⇒ <code>void</code>
+Renders results for question 2 & 5 Part2 -- Based on Question 2
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> |  |
+| worst | <code>boolean</code> | View for worst performing customer T/F |
+
+<a name="module_cloud360-view..Record"></a>
+
+### cloud360-view~Record : <code>Object</code>
+Employee record object
+
+**Kind**: inner typedef of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| internalid | <code>String</code> | Employee internal ID |
+| name | <code>String</code> | Employee name |
+| email | <code>String</code> | Employee email |
+| birthdate | <code>Date</code> | Employee birthday |
+| supervisor | <code>Number</code> | Employee supervisor internal id |
+| 2012 | <code>Number</code> | Revenue - Total of sales in 2013 |
+| 2013 | <code>Number</code> | Revenue - Total of sales in 2013 |
+| daystobday | <code>Number</code> | Number of days until employee birthday |
+| bestcustomer | <code>BestCustomer</code> | Best customer for employee |
+| commission | <code>Number</code> | Sales commission earned for previous sales period |
+| dayssincesale | <code>Number</code> \| <code>String</code> | Number of days since last sale -- N/A if no sales for period |
+| lastsaledate | <code>String</code> | Date of previous sale as string -- N/A if no sales for period |
+
+<a name="module_cloud360-view..Question"></a>
+
+### cloud360-view~Question : <code>Object</code>
+Each question has a view object associated with it to display in the dom.
+
+**Kind**: inner typedef of [<code>cloud360-view</code>](#module_cloud360-view)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| internalid | <code>Number</code> | Internal ID for question |
+| question | <code>String</code> | Display text for question number |
+| title | <code>String</code> | Title of question |
+| view | <code>Object</code> | View object for the question |
+
 <a name="module_cloud360"></a>
 
 ## cloud360
@@ -96,12 +244,7 @@ Explain what tools were used during this practice - what program did you use to 
         * [~Q4_SetCommissions(emp, Current)](#module_cloud360..Q4_SetCommissions) ⇒ <code>void</code>
         * [~Q3P2_UpdateSalesTotals(managerSaleTotals, Current)](#module_cloud360..Q3P2_UpdateSalesTotals) ⇒ <code>void</code>
         * [~Q3_UpdateSalesTotals(year, sales, emp)](#module_cloud360..Q3_UpdateSalesTotals) ⇒ <code>Number</code>
-        * [~Q2_SetBestCustomer(empSales)](#module_cloud360..Q2_SetBestCustomer) ⇒ <code>String</code>
-            * [~CustomerSales](#module_cloud360..Q2_SetBestCustomer..CustomerSales) : <code>CustomerSales</code>
-            * [~UpdateObject](#module_cloud360..Q2_SetBestCustomer..UpdateObject) : <code>CustomerSale</code>
-            * [~CustomerSaleTotals](#module_cloud360..Q2_SetBestCustomer..CustomerSaleTotals) : <code>CustomerSales</code>
-            * [~CustomerSaleTotal](#module_cloud360..Q2_SetBestCustomer..CustomerSaleTotal) : <code>CustomerSale</code>
-            * [~BestCustomer](#module_cloud360..Q2_SetBestCustomer..BestCustomer) : <code>BestCustomer</code>
+        * [~Q2_SetBestCustomer(empSales, worst)](#module_cloud360..Q2_SetBestCustomer) ⇒ <code>Promise</code>
         * [~Q1_CalcDaysToBDay(emp, Current)](#module_cloud360..Q1_CalcDaysToBDay) ⇒ <code>Number</code>
         * [~RenderResults()](#module_cloud360..RenderResults) ⇒ <code>void</code>
         * [~Employee](#module_cloud360..Employee) : <code>Object</code>
@@ -111,10 +254,12 @@ Explain what tools were used during this practice - what program did you use to 
         * [~Supervisor](#module_cloud360..Supervisor) : <code>Object</code>
         * [~ManagerSaleTotals](#module_cloud360..ManagerSaleTotals) : <code>Object</code>
         * [~Sales](#module_cloud360..Sales) : <code>Array.&lt;Object&gt;</code>
-        * [~BestCustomer](#module_cloud360..BestCustomer) : <code>Object</code>
+        * [~HighLowCustomer](#module_cloud360..HighLowCustomer) : <code>Object</code>
         * [~CustomerSale](#module_cloud360..CustomerSale) : <code>Object</code>
         * [~CustomerSales](#module_cloud360..CustomerSales) : <code>Array.&lt;CustomerSale&gt;</code>
         * [~Transactions](#module_cloud360..Transactions)
+        * [~Questions](#module_cloud360..Questions) : <code>Array.&lt;Question&gt;</code>
+        * [~Question](#module_cloud360..Question) : <code>Object</code>
 
 <a name="module_cloud360.init"></a>
 
@@ -215,7 +360,7 @@ Updates employee sales totals for a period.  Returns sales for use in manager to
 
 <a name="module_cloud360..Q2_SetBestCustomer"></a>
 
-### cloud360~Q2\_SetBestCustomer(empSales) ⇒ <code>String</code>
+### cloud360~Q2\_SetBestCustomer(empSales, worst) ⇒ <code>Promise</code>
 Filters down employee sales for a period, then returns the customer name of their highest sale transaction
 
 **Kind**: inner method of [<code>cloud360</code>](#module_cloud360)  
@@ -223,48 +368,14 @@ Filters down employee sales for a period, then returns the customer name of thei
 To offset this, I added a couple more transactions to the 2013 revenue transaction list with the same customer names.  This method
 filters down sales by employee, calculates each customers total sales, then selects the customer with
 the highest total sale amount as the best customer.  
+**Fulfill**: <code>HighLowCustomer</code> - Object with name and total sales of highest or lowest customer  
+**Reject**: <code>Object</code> - Error object returned  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| empSales | <code>Array.&lt;Transaction&gt;</code> | Array of employee Sales from a period |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| empSales | <code>Array.&lt;Transaction&gt;</code> |  | Array of employee Sales from a period |
+| worst | <code>boolean</code> | <code>false</code> | Gets the worst customer by sales volume when true |
 
-
-* [~Q2_SetBestCustomer(empSales)](#module_cloud360..Q2_SetBestCustomer) ⇒ <code>String</code>
-    * [~CustomerSales](#module_cloud360..Q2_SetBestCustomer..CustomerSales) : <code>CustomerSales</code>
-    * [~UpdateObject](#module_cloud360..Q2_SetBestCustomer..UpdateObject) : <code>CustomerSale</code>
-    * [~CustomerSaleTotals](#module_cloud360..Q2_SetBestCustomer..CustomerSaleTotals) : <code>CustomerSales</code>
-    * [~CustomerSaleTotal](#module_cloud360..Q2_SetBestCustomer..CustomerSaleTotal) : <code>CustomerSale</code>
-    * [~BestCustomer](#module_cloud360..Q2_SetBestCustomer..BestCustomer) : <code>BestCustomer</code>
-
-<a name="module_cloud360..Q2_SetBestCustomer..CustomerSales"></a>
-
-#### Q2_SetBestCustomer~CustomerSales : <code>CustomerSales</code>
-**Kind**: inner constant of [<code>Q2\_SetBestCustomer</code>](#module_cloud360..Q2_SetBestCustomer)  
-<a name="module_cloud360..Q2_SetBestCustomer..UpdateObject"></a>
-
-#### Q2_SetBestCustomer~UpdateObject : <code>CustomerSale</code>
-**Kind**: inner constant of [<code>Q2\_SetBestCustomer</code>](#module_cloud360..Q2_SetBestCustomer)  
-<a name="module_cloud360..Q2_SetBestCustomer..CustomerSaleTotals"></a>
-
-#### Q2_SetBestCustomer~CustomerSaleTotals : <code>CustomerSales</code>
-Array of customers and their calculated sales for given period
-
-**Kind**: inner constant of [<code>Q2\_SetBestCustomer</code>](#module_cloud360..Q2_SetBestCustomer)  
-<a name="module_cloud360..Q2_SetBestCustomer..CustomerSaleTotal"></a>
-
-#### Q2_SetBestCustomer~CustomerSaleTotal : <code>CustomerSale</code>
-Object with combined total of sales for a customer in a given period
-
-**Kind**: inner constant of [<code>Q2\_SetBestCustomer</code>](#module_cloud360..Q2_SetBestCustomer)  
-<a name="module_cloud360..Q2_SetBestCustomer..BestCustomer"></a>
-
-#### Q2_SetBestCustomer~BestCustomer : <code>BestCustomer</code>
-Object for the employee's customer name and total of sales for a period
-
-**Kind**: inner constant of [<code>Q2\_SetBestCustomer</code>](#module_cloud360..Q2_SetBestCustomer)  
-**Summary**: Now that we have broken down the list of sales by employee and totaled the sales up for each
-customer, we can now reduce/eliminate customers by who has the greater total sales for the period.  This
-will, in turn, give us our true Best Customer by sales volume.  
 <a name="module_cloud360..Q1_CalcDaysToBDay"></a>
 
 ### cloud360~Q1\_CalcDaysToBDay(emp, Current) ⇒ <code>Number</code>
@@ -303,10 +414,11 @@ Employee record object
 | 2012 | <code>Number</code> | Revenue - Total of sales in 2013 |
 | 2013 | <code>Number</code> | Revenue - Total of sales in 2013 |
 | daystobday | <code>Number</code> | Number of days until employee birthday |
-| bestcustomer | <code>BestCustomer</code> | Best customer for employee |
+| bestcustomer | <code>HighLowCustomer</code> | Best customer for employee |
 | commission | <code>Number</code> | Sales commission earned for previous sales period |
 | dayssincesale | <code>Number</code> \| <code>String</code> | Number of days since last sale -- N/A if no sales for period |
 | lastsaledate | <code>String</code> | Date of previous sale as string -- N/A if no sales for period |
+| worstperforming | <code>HighLowCustomer</code> | Performance stats for lowest performing customer for employee |
 
 <a name="module_cloud360..Transaction"></a>
 
@@ -391,9 +503,9 @@ Type definition for counting sale transaction totals
 | --- | --- | --- |
 | amount | <code>Number</code> | Sale transaction amount |
 
-<a name="module_cloud360..BestCustomer"></a>
+<a name="module_cloud360..HighLowCustomer"></a>
 
-### cloud360~BestCustomer : <code>Object</code>
+### cloud360~HighLowCustomer : <code>Object</code>
 Object consisting of the name of an employees customer name with the most total sales and that amount
 
 **Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
@@ -434,6 +546,26 @@ Object compiled of of yearly revenue streams associated by year as id
 | Name | Type | Description |
 | --- | --- | --- |
 | 2013 | <code>Array.&lt;Transaction&gt;</code> | Sales transactions for 2013 |
+
+<a name="module_cloud360..Questions"></a>
+
+### cloud360~Questions : <code>Array.&lt;Question&gt;</code>
+List of questions with their titles and views for updating the dom independently.
+
+**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
+<a name="module_cloud360..Question"></a>
+
+### cloud360~Question : <code>Object</code>
+Each question has a view object associated with it to display in the dom.
+
+**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| internalid | <code>Number</code> | Internal ID for question |
+| question | <code>String</code> | Display text for question number |
+| title | <code>String</code> | Title of question |
+| view | <code>Object</code> | View object for the question |
 
 
 ## Copyright
