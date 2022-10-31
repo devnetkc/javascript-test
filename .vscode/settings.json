@@ -21,7 +21,8 @@
     "internalid",
     "lastsaledate",
     "saledate",
-    "totalsales"
+    "totalsales",
+    "worstperforming"
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
