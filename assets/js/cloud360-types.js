@@ -112,8 +112,5 @@
  * @description List of questions with their titles and views for updating the dom independently.
  * @type {Question[]}
  */
-/**
- * * END Type Definitions * *
- */
 
 export const cloud360Types = {};

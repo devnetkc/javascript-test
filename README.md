@@ -100,29 +100,20 @@ Type definitions for Cloud 360 JavaScript Test
 **Format**:   
 
 * [cloud360Types](#module_cloud360Types)
-    * _static_
-        * [.cloud360Types](#module_cloud360Types.cloud360Types)
-    * _inner_
-        * [~Employee](#module_cloud360Types..Employee) : <code>Object</code>
-        * [~Transaction](#module_cloud360Types..Transaction) : <code>Object</code>
-        * [~Transactions](#module_cloud360Types..Transactions) : <code>Object</code>
-        * [~CommissionRule](#module_cloud360Types..CommissionRule) : <code>Object</code>
-        * [~Current](#module_cloud360Types..Current) : <code>Object</code>
-        * [~Supervisor](#module_cloud360Types..Supervisor) : <code>Object</code>
-        * [~ManagerSaleTotals](#module_cloud360Types..ManagerSaleTotals) : <code>Object</code>
-        * [~Sales](#module_cloud360Types..Sales) : <code>Array.&lt;Object&gt;</code>
-        * [~HighLowCustomer](#module_cloud360Types..HighLowCustomer) : <code>Object</code>
-        * [~CustomerSale](#module_cloud360Types..CustomerSale) : <code>Object</code>
-        * [~CustomerSales](#module_cloud360Types..CustomerSales) : <code>Array.&lt;CustomerSale&gt;</code>
-        * [~Question](#module_cloud360Types..Question) : <code>Object</code>
-        * [~Questions](#module_cloud360Types..Questions) : <code>Array.&lt;Question&gt;</code>
+    * [~Employee](#module_cloud360Types..Employee) : <code>Object</code>
+    * [~Transaction](#module_cloud360Types..Transaction) : <code>Object</code>
+    * [~Transactions](#module_cloud360Types..Transactions) : <code>Object</code>
+    * [~CommissionRule](#module_cloud360Types..CommissionRule) : <code>Object</code>
+    * [~Current](#module_cloud360Types..Current) : <code>Object</code>
+    * [~Supervisor](#module_cloud360Types..Supervisor) : <code>Object</code>
+    * [~ManagerSaleTotals](#module_cloud360Types..ManagerSaleTotals) : <code>Object</code>
+    * [~Sales](#module_cloud360Types..Sales) : <code>Array.&lt;Object&gt;</code>
+    * [~HighLowCustomer](#module_cloud360Types..HighLowCustomer) : <code>Object</code>
+    * [~CustomerSale](#module_cloud360Types..CustomerSale) : <code>Object</code>
+    * [~CustomerSales](#module_cloud360Types..CustomerSales) : <code>Array.&lt;CustomerSale&gt;</code>
+    * [~Question](#module_cloud360Types..Question) : <code>Object</code>
+    * [~Questions](#module_cloud360Types..Questions) : <code>Array.&lt;Question&gt;</code>
 
-<a name="module_cloud360Types.cloud360Types"></a>
-
-### cloud360Types.cloud360Types
-* END Type Definitions * *
-
-**Kind**: static constant of [<code>cloud360Types</code>](#module_cloud360Types)  
 <a name="module_cloud360Types..Employee"></a>
 
 ### cloud360Types~Employee : <code>Object</code>
