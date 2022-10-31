@@ -74,7 +74,7 @@ import { RenderView } from './cloud360-view.js';
 /**
  * @typedef HighLowCustomer
  * @type {Object}
- * @description Object consisting of the name of an employees customer name with the most total sales and that amount
+ * @description Object consisting of the name of an employees customers name with the most/least total sales and that amount
  * @property {String} name - Name of customer with highest total sale count
  * @property {Number} totalsales - Accumulated total of all sales transactions for customer
  *

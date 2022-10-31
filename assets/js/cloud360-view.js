@@ -15,10 +15,11 @@
  * @property {Number} 2012 Revenue - Total of sales in 2013
  * @property {Number} 2013 Revenue - Total of sales in 2013
  * @property {Number} daystobday - Number of days until employee birthday
- * @property {BestCustomer} bestcustomer - Best customer for employee
+ * @property {HighLowCustomer} bestcustomer - Best customer for employee
  * @property {Number} commission - Sales commission earned for previous sales period
  * @property {Number|String} dayssincesale - Number of days since last sale -- N/A if no sales for period
  * @property {String} lastsaledate - Date of previous sale as string -- N/A if no sales for period
+ * @property {HighLowCustomer} worstperforming - Performance stats for lowest performing customer for employee
  */
 /**
  * @typedef Question
