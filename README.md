@@ -83,12 +83,217 @@ Explain what tools were used during this practice - what program did you use to 
 ## Modules
 
 <dl>
+<dt><a href="#module_cloud360Types">cloud360Types</a></dt>
+<dd><p>Type definitions for Cloud 360 JavaScript Test</p>
+</dd>
 <dt><a href="#module_cloud360-view">cloud360-view</a></dt>
 <dd></dd>
 <dt><a href="#module_cloud360">cloud360</a></dt>
 <dd></dd>
 </dl>
 
+<a name="module_cloud360Types"></a>
+
+## cloud360Types
+Type definitions for Cloud 360 JavaScript Test
+
+**Format**:   
+
+* [cloud360Types](#module_cloud360Types)
+    * _static_
+        * [.cloud360Types](#module_cloud360Types.cloud360Types)
+    * _inner_
+        * [~Employee](#module_cloud360Types..Employee) : <code>Object</code>
+        * [~Transaction](#module_cloud360Types..Transaction) : <code>Object</code>
+        * [~Transactions](#module_cloud360Types..Transactions) : <code>Object</code>
+        * [~CommissionRule](#module_cloud360Types..CommissionRule) : <code>Object</code>
+        * [~Current](#module_cloud360Types..Current) : <code>Object</code>
+        * [~Supervisor](#module_cloud360Types..Supervisor) : <code>Object</code>
+        * [~ManagerSaleTotals](#module_cloud360Types..ManagerSaleTotals) : <code>Object</code>
+        * [~Sales](#module_cloud360Types..Sales) : <code>Array.&lt;Object&gt;</code>
+        * [~HighLowCustomer](#module_cloud360Types..HighLowCustomer) : <code>Object</code>
+        * [~CustomerSale](#module_cloud360Types..CustomerSale) : <code>Object</code>
+        * [~CustomerSales](#module_cloud360Types..CustomerSales) : <code>Array.&lt;CustomerSale&gt;</code>
+        * [~Question](#module_cloud360Types..Question) : <code>Object</code>
+        * [~Questions](#module_cloud360Types..Questions) : <code>Array.&lt;Question&gt;</code>
+
+<a name="module_cloud360Types.cloud360Types"></a>
+
+### cloud360Types.cloud360Types
+* END Type Definitions * *
+
+**Kind**: static constant of [<code>cloud360Types</code>](#module_cloud360Types)  
+<a name="module_cloud360Types..Employee"></a>
+
+### cloud360Types~Employee : <code>Object</code>
+Employee record object
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| internalid | <code>String</code> | Employee internal ID |
+| name | <code>String</code> | Employee name |
+| email | <code>String</code> | Employee email |
+| birthdate | <code>Date</code> | Employee birthday |
+| supervisor | <code>Number</code> | Employee supervisor internal id |
+| 2012 | <code>Number</code> | Revenue - Total of sales in 2012 |
+| 2013 | <code>Number</code> | Revenue - Total of sales in 2013 |
+| daystobday | <code>Number</code> | Number of days until employee birthday |
+| bestcustomer | <code>HighLowCustomer</code> | Best customer for employee |
+| commission | <code>Number</code> | Sales commission earned for previous sales period |
+| dayssincesale | <code>Number</code> \| <code>String</code> | Number of days since last sale -- N/A if no sales for period |
+| lastsaledate | <code>String</code> | Date of previous sale as string -- N/A if no sales for period |
+| worstperforming | <code>HighLowCustomer</code> | Performance stats for lowest performing customer for employee |
+
+<a name="module_cloud360Types..Transaction"></a>
+
+### cloud360Types~Transaction : <code>Object</code>
+Sales transaction record object
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| type | <code>String</code> | Type of transaction |
+| customer | <code>String</code> | Transaction customer name |
+| Employee | <code>Number</code> \| <code>String</code> | Employee internal ID of transaction |
+| amount | <code>Number</code> \| <code>String</code> | Transaction total |
+| saledate | <code>String</code> | Date of transaction |
+
+<a name="module_cloud360Types..Transactions"></a>
+
+### cloud360Types~Transactions : <code>Object</code>
+Object compiled of of yearly revenue streams associated by year as id
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| 2013 | <code>Array.&lt;Transaction&gt;</code> | Sales transactions for 2013 |
+
+<a name="module_cloud360Types..CommissionRule"></a>
+
+### cloud360Types~CommissionRule : <code>Object</code>
+Object of commission rules which are applicable calculating commission earned for an employee
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| employee | <code>Number</code> \| <code>String</code> | Employee internal ID of transaction |
+| percentage | <code>String</code> | Commission percentage of sales |
+| bonus | <code>Number</code> \| <code>String</code> | Bonus for increasing sales over previous period |
+
+<a name="module_cloud360Types..Current"></a>
+
+### cloud360Types~Current : <code>Object</code>
+Object which contains current date properties for updating records
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| CurDate | <code>Date</code> | Current Date |
+| CurMonth | <code>Date</code> | Current Month |
+| CurYear | <code>Date</code> | Current Year |
+| PrevCommYearName | <code>String</code> | Previous commission Year as property string name |
+| CurrCommYearName | <code>String</code> | Current commission Year as property string name |
+| CurrCommYear | <code>Number</code> | Current commission Year as number |
+
+<a name="module_cloud360Types..Supervisor"></a>
+
+### cloud360Types~Supervisor : <code>Object</code>
+Object which stores the calculated total sales of a period for a supervisor
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | Total sales amount of managed employees |
+
+<a name="module_cloud360Types..ManagerSaleTotals"></a>
+
+### cloud360Types~ManagerSaleTotals : <code>Object</code>
+Object which contains supervisors and their period sale totals
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| ([0-9]+) | <code>Supervisor</code> | Internal ID of supervisor |
+
+<a name="module_cloud360Types..Sales"></a>
+
+### cloud360Types~Sales : <code>Array.&lt;Object&gt;</code>
+Type definition for counting sale transaction totals
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| amount | <code>Number</code> | Sale transaction amount |
+
+<a name="module_cloud360Types..HighLowCustomer"></a>
+
+### cloud360Types~HighLowCustomer : <code>Object</code>
+Object consisting of the name of an employees customers name with the most/least total sales and that amount
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| name | <code>String</code> | Name of customer with highest total sale count |
+| totalsales | <code>Number</code> | Accumulated total of all sales transactions for customer |
+
+<a name="module_cloud360Types..CustomerSale"></a>
+
+### cloud360Types~CustomerSale : <code>Object</code>
+Object consisting of the name of a customer and sale total for a transaction
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| customer | <code>String</code> | Name of customer on transaction |
+| amount | <code>Number</code> | Transaction sale total |
+
+<a name="module_cloud360Types..CustomerSales"></a>
+
+### cloud360Types~CustomerSales : <code>Array.&lt;CustomerSale&gt;</code>
+Array of an employee's customer sales with the customer's name and amount of transaction
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+<a name="module_cloud360Types..Question"></a>
+
+### cloud360Types~Question : <code>Object</code>
+Each question has a view object associated with it to display in the dom.
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| internalid | <code>Number</code> | Internal ID for question |
+| question | <code>String</code> | Display text for question number |
+| title | <code>String</code> | Title of question |
+| view | <code>Object</code> | View object for the question |
+
+<a name="module_cloud360Types..Questions"></a>
+
+### cloud360Types~Questions : <code>Array.&lt;Question&gt;</code>
+List of questions with their titles and views for updating the dom independently.
+
+**Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
 <a name="module_cloud360-view"></a>
 
 ## cloud360-view
@@ -102,8 +307,6 @@ Explain what tools were used during this practice - what program did you use to 
     * [~renderQ4(employees)](#module_cloud360-view..renderQ4) ⇒ <code>void</code>
     * [~renderQ5(employees)](#module_cloud360-view..renderQ5) ⇒ <code>void</code>
     * [~renderPerformanceQ(employees, worst)](#module_cloud360-view..renderPerformanceQ) ⇒ <code>void</code>
-    * [~Record](#module_cloud360-view..Record) : <code>Object</code>
-    * [~Question](#module_cloud360-view..Question) : <code>Object</code>
 
 <a name="module_cloud360-view..RenderView"></a>
 
@@ -115,7 +318,7 @@ Explain what tools were used during this practice - what program did you use to 
 | --- | --- | --- |
 | title | <code>String</code> | Title for view |
 | question | <code>String</code> | Question shorthand title |
-| record | <code>Record</code> | Employee object records for question |
+| record | <code>Employee</code> | Employee object records for question |
 
 <a name="new_module_cloud360-view..RenderView_new"></a>
 
@@ -125,7 +328,7 @@ Holds view object for updated employee record and view
 
 | Param | Type | Description |
 | --- | --- | --- |
-| question | <code>Question</code> | Question object with its properties |
+| question | <code>cloud360Types.Question</code> | Question object with its properties |
 | selector | <code>String</code> | jQuery selector string for dom element to update view on |
 | parent | <code>String</code> | Parent jQuery selector string for dom element updates |
 
@@ -186,47 +389,10 @@ Renders results for question 2 & 5 Part2 -- Based on Question 2
 **Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
 **Access**: protected  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| employees | <code>Array.&lt;Employee&gt;</code> |  |
-| worst | <code>boolean</code> | View for worst performing customer T/F |
-
-<a name="module_cloud360-view..Record"></a>
-
-### cloud360-view~Record : <code>Object</code>
-Employee record object
-
-**Kind**: inner typedef of [<code>cloud360-view</code>](#module_cloud360-view)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| internalid | <code>String</code> | Employee internal ID |
-| name | <code>String</code> | Employee name |
-| email | <code>String</code> | Employee email |
-| birthdate | <code>Date</code> | Employee birthday |
-| supervisor | <code>Number</code> | Employee supervisor internal id |
-| 2012 | <code>Number</code> | Revenue - Total of sales in 2013 |
-| 2013 | <code>Number</code> | Revenue - Total of sales in 2013 |
-| daystobday | <code>Number</code> | Number of days until employee birthday |
-| bestcustomer | <code>BestCustomer</code> | Best customer for employee |
-| commission | <code>Number</code> | Sales commission earned for previous sales period |
-| dayssincesale | <code>Number</code> \| <code>String</code> | Number of days since last sale -- N/A if no sales for period |
-| lastsaledate | <code>String</code> | Date of previous sale as string -- N/A if no sales for period |
-
-<a name="module_cloud360-view..Question"></a>
-
-### cloud360-view~Question : <code>Object</code>
-Each question has a view object associated with it to display in the dom.
-
-**Kind**: inner typedef of [<code>cloud360-view</code>](#module_cloud360-view)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| internalid | <code>Number</code> | Internal ID for question |
-| question | <code>String</code> | Display text for question number |
-| title | <code>String</code> | Title of question |
-| view | <code>Object</code> | View object for the question |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> |  |  |
+| worst | <code>boolean</code> | <code>false</code> | View for worst performing customer T/F |
 
 <a name="module_cloud360"></a>
 
@@ -235,10 +401,11 @@ Each question has a view object associated with it to display in the dom.
 
 * [cloud360](#module_cloud360)
     * _static_
-        * [.init(markdown)](#module_cloud360.init) ⇒ <code>String</code> \| <code>void</code>
+        * [.init(raw)](#module_cloud360.init) ⇒ <code>String</code> \| <code>void</code>
     * _inner_
-        * [~Employees](#module_cloud360..Employees) : <code>Array.&lt;Employee&gt;</code>
-        * [~CommissionRules](#module_cloud360..CommissionRules) : <code>Array.&lt;CommissionRule&gt;</code>
+        * [~Employees](#module_cloud360..Employees) : <code>Array.&lt;cloud360Types.Employee&gt;</code>
+        * [~Revenue](#module_cloud360..Revenue) : <code>cloud360Types.Transactions</code>
+        * [~CommissionRules](#module_cloud360..CommissionRules) : <code>Array.&lt;cloud360Types.CommissionRule&gt;</code>
         * [~UpdateEmpRec(year)](#module_cloud360..UpdateEmpRec) ⇒ <code>Promise</code>
         * [~Q5P1_DaysSinceSale(emp, Current)](#module_cloud360..Q5P1_DaysSinceSale) ⇒ <code>String</code>
         * [~Q4_SetCommissions(emp, Current)](#module_cloud360..Q4_SetCommissions) ⇒ <code>void</code>
@@ -247,23 +414,10 @@ Each question has a view object associated with it to display in the dom.
         * [~Q2_SetBestCustomer(empSales, worst)](#module_cloud360..Q2_SetBestCustomer) ⇒ <code>Promise</code>
         * [~Q1_CalcDaysToBDay(emp, Current)](#module_cloud360..Q1_CalcDaysToBDay) ⇒ <code>Number</code>
         * [~RenderResults()](#module_cloud360..RenderResults) ⇒ <code>void</code>
-        * [~Employee](#module_cloud360..Employee) : <code>Object</code>
-        * [~Transaction](#module_cloud360..Transaction) : <code>Object</code>
-        * [~CommissionRule](#module_cloud360..CommissionRule) : <code>Object</code>
-        * [~Current](#module_cloud360..Current) : <code>Object</code>
-        * [~Supervisor](#module_cloud360..Supervisor) : <code>Object</code>
-        * [~ManagerSaleTotals](#module_cloud360..ManagerSaleTotals) : <code>Object</code>
-        * [~Sales](#module_cloud360..Sales) : <code>Array.&lt;Object&gt;</code>
-        * [~HighLowCustomer](#module_cloud360..HighLowCustomer) : <code>Object</code>
-        * [~CustomerSale](#module_cloud360..CustomerSale) : <code>Object</code>
-        * [~CustomerSales](#module_cloud360..CustomerSales) : <code>Array.&lt;CustomerSale&gt;</code>
-        * [~Transactions](#module_cloud360..Transactions)
-        * [~Questions](#module_cloud360..Questions) : <code>Array.&lt;Question&gt;</code>
-        * [~Question](#module_cloud360..Question) : <code>Object</code>
 
 <a name="module_cloud360.init"></a>
 
-### cloud360.init(markdown) ⇒ <code>String</code> \| <code>void</code>
+### cloud360.init(raw) ⇒ <code>String</code> \| <code>void</code>
 Determines how to initialize module
 
 **Kind**: static method of [<code>cloud360</code>](#module_cloud360)  
@@ -278,17 +432,21 @@ parts of the project (like the markdown/readme).
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| markdown | <code>boolean</code> | <code>false</code> | Return output for use in markdown page |
+| raw | <code>boolean</code> | <code>false</code> | Return output for use in other format |
 
 <a name="module_cloud360..Employees"></a>
 
-### cloud360~Employees : <code>Array.&lt;Employee&gt;</code>
+### cloud360~Employees : <code>Array.&lt;cloud360Types.Employee&gt;</code>
 Array of employees using Employee record objects
 
 **Kind**: inner constant of [<code>cloud360</code>](#module_cloud360)  
+<a name="module_cloud360..Revenue"></a>
+
+### cloud360~Revenue : <code>cloud360Types.Transactions</code>
+**Kind**: inner constant of [<code>cloud360</code>](#module_cloud360)  
 <a name="module_cloud360..CommissionRules"></a>
 
-### cloud360~CommissionRules : <code>Array.&lt;CommissionRule&gt;</code>
+### cloud360~CommissionRules : <code>Array.&lt;cloud360Types.CommissionRule&gt;</code>
 Array of CommissionRule records for calculating employee commissions for a sales period
 
 **Kind**: inner constant of [<code>cloud360</code>](#module_cloud360)  
@@ -391,182 +549,11 @@ Returns number of days until an employees next birthday
 <a name="module_cloud360..RenderResults"></a>
 
 ### cloud360~RenderResults() ⇒ <code>void</code>
-This draws the business logic to the dom when its ready
+This renders the raw data to the dom when it is read
 
 **Kind**: inner method of [<code>cloud360</code>](#module_cloud360)  
 **Summary**: This method was chosen so that the rest of the page could continue to load while processing logic.
 While there isn't a lot going on in this demo, on a normal site, we would want to control how/when we update the dom as data is ready.  
-<a name="module_cloud360..Employee"></a>
-
-### cloud360~Employee : <code>Object</code>
-Employee record object
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| internalid | <code>String</code> | Employee internal ID |
-| name | <code>String</code> | Employee name |
-| email | <code>String</code> | Employee email |
-| birthdate | <code>Date</code> | Employee birthday |
-| supervisor | <code>Number</code> | Employee supervisor internal id |
-| 2012 | <code>Number</code> | Revenue - Total of sales in 2013 |
-| 2013 | <code>Number</code> | Revenue - Total of sales in 2013 |
-| daystobday | <code>Number</code> | Number of days until employee birthday |
-| bestcustomer | <code>HighLowCustomer</code> | Best customer for employee |
-| commission | <code>Number</code> | Sales commission earned for previous sales period |
-| dayssincesale | <code>Number</code> \| <code>String</code> | Number of days since last sale -- N/A if no sales for period |
-| lastsaledate | <code>String</code> | Date of previous sale as string -- N/A if no sales for period |
-| worstperforming | <code>HighLowCustomer</code> | Performance stats for lowest performing customer for employee |
-
-<a name="module_cloud360..Transaction"></a>
-
-### cloud360~Transaction : <code>Object</code>
-Sales transaction record object
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| type | <code>String</code> | Type of transaction |
-| customer | <code>String</code> | Transaction customer name |
-| Employee | <code>Number</code> \| <code>String</code> | Employee internal ID of transaction |
-| amount | <code>Number</code> \| <code>String</code> | Transaction total |
-| saledate | <code>String</code> | Date of transaction |
-
-<a name="module_cloud360..CommissionRule"></a>
-
-### cloud360~CommissionRule : <code>Object</code>
-Object of commission rules which are applicable calculating commission earned for an employee
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| employee | <code>Number</code> \| <code>String</code> | Employee internal ID of transaction |
-| percentage | <code>String</code> | Commission percentage of sales |
-| bonus | <code>Number</code> \| <code>String</code> | Bonus for increasing sales over previous period |
-
-<a name="module_cloud360..Current"></a>
-
-### cloud360~Current : <code>Object</code>
-Object which contains current date properties for updating records
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| CurDate | <code>Date</code> | Current Date |
-| CurMonth | <code>Date</code> | Current Month |
-| CurYear | <code>Date</code> | Current Year |
-| PrevCommYearName | <code>String</code> | Previous commission Year as property string name |
-| CurrCommYearName | <code>String</code> | Current commission Year as property string name |
-| CurrCommYear | <code>Number</code> | Current commission Year as number |
-
-<a name="module_cloud360..Supervisor"></a>
-
-### cloud360~Supervisor : <code>Object</code>
-Object which stores the calculated total sales of a period for a supervisor
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| amount | <code>Number</code> | Total sales amount of managed employees |
-
-<a name="module_cloud360..ManagerSaleTotals"></a>
-
-### cloud360~ManagerSaleTotals : <code>Object</code>
-Object which contains supervisors and their period sale totals
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| ([0-9]+) | <code>Supervisor</code> | Internal ID of supervisor |
-
-<a name="module_cloud360..Sales"></a>
-
-### cloud360~Sales : <code>Array.&lt;Object&gt;</code>
-Type definition for counting sale transaction totals
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| amount | <code>Number</code> | Sale transaction amount |
-
-<a name="module_cloud360..HighLowCustomer"></a>
-
-### cloud360~HighLowCustomer : <code>Object</code>
-Object consisting of the name of an employees customer name with the most total sales and that amount
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| name | <code>String</code> | Name of customer with highest total sale count |
-| totalsales | <code>Number</code> | Accumulated total of all sales transactions for customer |
-
-<a name="module_cloud360..CustomerSale"></a>
-
-### cloud360~CustomerSale : <code>Object</code>
-Object consisting of the name of a customer and sale total for a transaction
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| customer | <code>String</code> | Name of customer on transaction |
-| amount | <code>Number</code> | Transaction sale total |
-
-<a name="module_cloud360..CustomerSales"></a>
-
-### cloud360~CustomerSales : <code>Array.&lt;CustomerSale&gt;</code>
-Array of an employee's customer sales with the customer's name and amount of transaction
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-<a name="module_cloud360..Transactions"></a>
-
-### cloud360~Transactions
-Object compiled of of yearly revenue streams associated by year as id
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| 2013 | <code>Array.&lt;Transaction&gt;</code> | Sales transactions for 2013 |
-
-<a name="module_cloud360..Questions"></a>
-
-### cloud360~Questions : <code>Array.&lt;Question&gt;</code>
-List of questions with their titles and views for updating the dom independently.
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-<a name="module_cloud360..Question"></a>
-
-### cloud360~Question : <code>Object</code>
-Each question has a view object associated with it to display in the dom.
-
-**Kind**: inner typedef of [<code>cloud360</code>](#module_cloud360)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| internalid | <code>Number</code> | Internal ID for question |
-| question | <code>String</code> | Display text for question number |
-| title | <code>String</code> | Title of question |
-| view | <code>Object</code> | View object for the question |
-
 
 ## Copyright
 

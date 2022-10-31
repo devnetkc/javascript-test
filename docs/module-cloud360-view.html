@@ -105,6 +105,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -130,6 +132,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"></td>
         </tr>
@@ -152,6 +158,12 @@
 
             
 
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
             
 
             <td class="description last">View for worst performing customer T/F</td>
@@ -195,7 +207,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line243">line 243</a>
+        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line216">line 216</a>
     </li></ul></dd>
     
 
@@ -350,7 +362,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line110">line 110</a>
+        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -540,7 +552,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line143">line 143</a>
+        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line116">line 116</a>
     </li></ul></dd>
     
 
@@ -695,7 +707,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line179">line 179</a>
+        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line152">line 152</a>
     </li></ul></dd>
     
 
@@ -850,7 +862,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line210">line 210</a>
+        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line183">line 183</a>
     </li></ul></dd>
     
 
@@ -902,462 +914,6 @@
     
 
     
-        <h3 class="subsection-title">Type Definitions</h3>
-
-        
-                
-<h4 class="name" id="~Question">Question</h4>
-
-
-
-
-<div class="description">
-    Each question has a view object associated with it to display in the dom.
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line23">line 23</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-            
-                
-<h4 class="name" id="~Record">Record</h4>
-
-
-
-
-<div class="description">
-    Employee record object
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>internalid</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Employee internal ID</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Employee name</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>email</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Employee email</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>birthdate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Date</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Employee birthday</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>supervisor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Employee supervisor internal id</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>2012</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Revenue - Total of sales in 2013</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>2013</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Revenue - Total of sales in 2013</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>daystobday</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Number of days until employee birthday</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>bestcustomer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">BestCustomer</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Best customer for employee</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>commission</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Sales commission earned for previous sales period</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>dayssincesale</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-|
-
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Number of days since last sale -- N/A if no sales for period</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>lastsaledate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Date of previous sale as string -- N/A if no sales for period</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="cloud360-view.js.html">cloud360-view.js</a>, <a href="cloud360-view.js.html#line6">line 6</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-            
-    
 
     
 </article>
@@ -1370,13 +926,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloud360.html">cloud360</a></li><li><a href="module-cloud360-view.html">cloud360-view</a></li></ul><h3>Classes</h3><ul><li><a href="module-cloud360-view-RenderView.html">RenderView</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloud360.html">cloud360</a></li><li><a href="module-cloud360-view.html">cloud360-view</a></li><li><a href="module-cloud360Types.html">cloud360Types</a></li></ul><h3>Classes</h3><ul><li><a href="module-cloud360-view-RenderView.html">RenderView</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Mon Oct 31 2022 00:57:21 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Mon Oct 31 2022 10:40:36 GMT-0500 (Central Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
