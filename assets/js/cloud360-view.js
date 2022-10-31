@@ -106,9 +106,6 @@ export class RenderView {
                         JSON.stringify(this.record, null, '\t')
                     );
             }
-            console.log(
-                `rendering ${JSON.stringify(this.record)} ---HERE---- ${this.selector}`
-            );
         }
         /**
          * @name renderQ1
