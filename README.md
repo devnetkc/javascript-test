@@ -52,7 +52,7 @@ Open <http://localhost:3000> to see the page in action.
 
 ### Given Variables:
 * [~Employees](#module_cloud360..Employees)
-* [~Revenue2013](#module_cloud360..Revenue2013)
+* [~Revenue2013](#module_cloud360..Revenue)
 * [~CommissionRules](#module_cloud360..CommissionRules)
 
 ### Details
