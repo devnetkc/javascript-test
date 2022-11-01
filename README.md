@@ -303,6 +303,8 @@ List of questions with their titles and views for updating the dom independently
 
 ### cloud360-view~RenderView
 **Kind**: inner class of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Summary**: Because the tables are being rendered so often, it made sense for parts to be setup as variables
+which allows them to more easily be reused and modified later.  
 **Properties**
 
 | Name | Type | Description |
@@ -310,6 +312,9 @@ List of questions with their titles and views for updating the dom independently
 | title | <code>String</code> | Title for view |
 | question | <code>String</code> | Question shorthand title |
 | record | <code>Employee</code> | Employee object records for question |
+| tableHeaderTop | <code>String</code> | Repeated use table header top for cards |
+| tableHeaderBot | <code>String</code> | Repeated use table header bottom for cards |
+| tableBot | <code>String</code> | Repeated use table bottom for cards |
 
 <a name="new_module_cloud360-view..RenderView_new"></a>
 
