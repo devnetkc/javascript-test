@@ -1,8 +1,9 @@
 # @format
 
 name: Update Documentation
-on: push
-  branches:
+on: push:
+    # Sequence of patterns matched against refs/heads
+    branches:
       - main
 
 env:
