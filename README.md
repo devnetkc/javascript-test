@@ -157,7 +157,7 @@ Sales transaction record object
 <a name="module_cloud360Types..Transactions"></a>
 
 ### cloud360Types~Transactions : <code>Object</code>
-Object compiled of of yearly revenue streams associated by year as id
+Object compiled of yearly revenue streams associated by year as id
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
 **Properties**
