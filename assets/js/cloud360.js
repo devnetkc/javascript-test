@@ -356,11 +356,11 @@ const Q4_SetCommissions = (emp, Current) => {
   const BonusQualifies =
     emp[Current.CurrCommYearName] - emp[Current.PrevCommYearName] > 0;
   // Apply commissions to employee rec
-  emp['commission'] = emp[Current.CurrCommYearName] * (CommPercent / 100);
+  emp.commission = emp[Current.CurrCommYearName] * (CommPercent / 100);
   // If bonus applies, set add the bonus amount to total commission
-  if (BonusQualifies) emp['commission'] += Number(EmpCommissionRules.bonus);
+  if (BonusQualifies) emp.commission += Number(EmpCommissionRules.bonus);
   // Lock in commission at fixed point of 2 decimal places
-  emp['commission'] = emp['commission'].toFixed(2);
+  emp.commission = emp.commission.toFixed(2);
 };
 /**
  *
