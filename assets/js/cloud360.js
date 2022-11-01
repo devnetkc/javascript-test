@@ -256,11 +256,8 @@ const UpdateEmpRecs = async () => {
   let expand = true;
   // Create a view for each question
   for (const Question of Questions) {
-    Question.view = new RenderView(
-      Question,
-      `#question-${Question.question}`,
-      '#JSTest2022'
-    );
+    Question.view = new RenderView(`#question-${Question.question}`);
+    Question.view.setCardProperties(Question, '#JSTest2022');
     Question.view.addAccordionCard(Question, expand);
     // Expand only the first accordion on the page
     expand = false;
@@ -301,9 +298,7 @@ const UpdateEmpRecs = async () => {
     }
   }
   // Draw the views with updated data
-  Questions.forEach(question =>
-    question.view.renderQuestion(Employees, question)
-  );
+  Questions.forEach(question => question.view.renderView(Employees, question));
 };
 /**
  * @name Q5P1_DaysSinceSale
@@ -561,7 +556,6 @@ const Q1_CalcDaysToBDay = async (emp, Current) => {
 /**
  * @name RenderResults
  * @function
- * @deprecated - Create a new view with cloud360-view instead
  * @return {void}
  * @description This renders the raw data to the dom when it is read
  * @summary This method was chosen so that the rest of the page could continue to load while processing logic.
@@ -609,7 +603,8 @@ export const init = async (raw = false) => {
   try {
     await UpdateEmpRecs();
     if (raw) return JSON.stringify(Employees);
-    RenderResults(Employees, 'pre#pre1');
+    const RawDataView = new RenderView('raw');
+    RawDataView.renderView(Employees, 'raw');
   } catch (err) {
     console.error(err);
   }
