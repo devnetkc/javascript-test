@@ -15,6 +15,8 @@ import * as cloud360Types from './cloud360-types.js';
  * @property {String} tableHeaderBot - Repeated use table header bottom for cards
  * @property {String} tableBot - Repeated use table bottom for cards
  * @param {String} parent - Parent jQuery selector string for dom element updates
+ * @summary Because the tables are being rendered so often, it made sense for parts to be setup as variables
+ * which allows them to more easily be reused and modified later.
  */
 export class RenderView {
     constructor(question, selector, parent) {
