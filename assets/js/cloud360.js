@@ -1,6 +1,7 @@
 /**
  * @format
  * @module cloud360
+ * @version 1.1.0
  */
 import * as cloud360Types from './cloud360-types.js';
 import './cloud360-view.js';
@@ -8,6 +9,7 @@ import { RenderView } from './cloud360-view.js';
 /**
  * @type {cloud360Types.Employee[]}
  * @description Array of employees using Employee record objects
+ * @since 1.0.0
  */
 const Employees = [
   {
@@ -56,7 +58,13 @@ const Employees = [
     '2013 Revenue': '0.00',
   },
 ];
-/** @type {cloud360Types.Transactions} */
+/**
+ * @type {cloud360Types.Transactions}
+ * @description Object with a property of year which is an array of transaction objects for given period
+ * @summary We broke the year away as a property instead of the provided variable because in the real world we
+ * would not just be dealing with a single year here.  We would have some way of selecting the year we want to fetch data for.
+ * @since 1.0.0
+ *  */
 const Revenue = {
   2013: [
     {
@@ -168,6 +176,7 @@ const Revenue = {
 /**
  * @type {cloud360Types.CommissionRule[]}
  * @description Array of CommissionRule records for calculating employee commissions for a sales period
+ * @since 1.0.0
  */
 const CommissionRules = [
   { employee: '1', percentage: '15%', bonus: '2000.00' },
@@ -186,6 +195,7 @@ const CommissionRules = [
  * @reject {void}
  * @description Creates new properties on Employees Object to store calculated values
  * @summary This method was created to initiate the business logic updates.
+ * @since 1.1.0
  */
 const UpdateEmpRecs = async () => {
   // Setting a constant for date given
@@ -291,18 +301,21 @@ const UpdateEmpRecs = async () => {
     }
   }
   // Draw the views with updated data
-  Questions.forEach(question => question.view.render(Employees, question));
+  Questions.forEach(question =>
+    question.view.renderQuestion(Employees, question)
+  );
 };
 /**
  * @name Q5P1_DaysSinceSale
  * @function
- * @param {Employee} emp
+ * @param {cloud360.Employee} emp
  * @param {Current} Current
  * @return {String}
  * @description Calculates the number of days since an employee had a sale
  * @summary This number is usually quite handy to have in business from a CRM standpoint.
  * This allows a companies sales team to focus in worker productivity, or could be converted to last sale date
  * for a customer, so sales can reach out to their customers to try and bring them back in.
+ * @since 1.0.0
  */
 const Q5P1_DaysSinceSale = (emp, Current) => {
   // Calculate the last sale date from order list
@@ -331,10 +344,11 @@ const Q5P1_DaysSinceSale = (emp, Current) => {
 /**
  * @name Q4_SetCommissions
  * @function
- * @param {Employee} emp
+ * @param {cloud360.Employee} emp
  * @param {Current} Current
  * @return {void}
  * @description Calculates the sales commission earned and applies it to the Employee record object
+ * @since 1.0.0
  */
 const Q4_SetCommissions = (emp, Current) => {
   const EmpCommissionRules = CommissionRules.filter(
@@ -361,6 +375,7 @@ const Q4_SetCommissions = (emp, Current) => {
  * @param {ManagerSaleTotals} managerSaleTotals
  * @param {Current} Current
  * @return {void}
+ * @since 1.0.0
  */
 const Q3P2_UpdateSalesTotals = (managerSaleTotals, Current) => {
   // Update managers 2013 sales
@@ -388,8 +403,9 @@ const Q3P2_UpdateSalesTotals = (managerSaleTotals, Current) => {
  * @function
  * @param {String} year
  * @param {Sales} sales
- * @param {Employee} emp
+ * @param {cloud360.Employee} emp
  * @return {Number}
+ * @since 1.0.0
  */
 const Q3_UpdateSalesTotals = (year, sales, emp) => {
   // Use property "2013 Revenue" to store this date on the employee object
@@ -421,6 +437,7 @@ const Q3_UpdateSalesTotals = (year, sales, emp) => {
  * To offset this, I added a couple more transactions to the 2013 revenue transaction list with the same customer names.  This method
  * filters down sales by employee, calculates each customers total sales, then selects the customer with
  * the highest total sale amount as the best customer.
+ * @since 1.0.0
  */
 const Q2_SetBestCustomer = async (empSales, worst = false) => {
   return new Promise((resolve, reject) => {
@@ -519,9 +536,10 @@ const Q2_SetBestCustomer = async (empSales, worst = false) => {
  * @name Q1_CalcDaysToBDay
  * @description Returns number of days until an employees next birthday
  * @function
- * @param {Employee} emp
+ * @param {cloud360.Employee} emp
  * @param {Current} Current
  * @return {Number}
+ * @since 1.0.0
  */
 const Q1_CalcDaysToBDay = async (emp, Current) => {
   // Use property daystobday to store this date on the employee object
@@ -543,10 +561,12 @@ const Q1_CalcDaysToBDay = async (emp, Current) => {
 /**
  * @name RenderResults
  * @function
+ * @deprecated - Create a new view with cloud360-view instead
  * @return {void}
  * @description This renders the raw data to the dom when it is read
  * @summary This method was chosen so that the rest of the page could continue to load while processing logic.
  * While there isn't a lot going on in this demo, on a normal site, we would want to control how/when we update the dom as data is ready.
+ * @since 1.0.0
  */
 const RenderResults = (content, selector) => {
   try {
@@ -583,6 +603,7 @@ const RenderResults = (content, selector) => {
  * We are also exporting init as our only public accessible function. Where the method can be called by the browser,
  * or we can call this using the markdown true and get a return string of what this renders for use in other
  * parts of the project (like the markdown/readme).
+ * @since 1.0.0
  */
 export const init = async (raw = false) => {
   try {

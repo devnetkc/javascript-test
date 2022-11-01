@@ -2,6 +2,8 @@
  * @format
  * @module cloud360Types
  * @description Type definitions for Cloud 360 JavaScript Test
+ * @version 1.0.0
+ * @since cloud360 v1.1.0
  */
 /**
  * @typedef Employee
@@ -20,6 +22,7 @@
  * @property {Number|String} dayssincesale - Number of days since last sale -- N/A if no sales for period
  * @property {String} lastsaledate - Date of previous sale as string -- N/A if no sales for period
  * @property {HighLowCustomer} worstperforming - Performance stats for lowest performing customer for employee
+ * @since cloud360 v1.0.0
  */
 /**
  * @typedef Transaction
@@ -30,6 +33,7 @@
  * @property {Number|String} Employee - Employee internal ID of transaction
  * @property {Number|String} amount - Transaction total
  * @property {String} saledate - Date of transaction
+ * @since cloud360 v1.0.0
  *
  */
 /**
@@ -37,6 +41,7 @@
  * @type {Object}
  * @property {Transaction[]} 2013 - Sales transactions for 2013
  * @description Object compiled of yearly revenue streams associated by year as id
+ * @since cloud360 v1.0.0
  */
 /**
  * @typedef CommissionRule
@@ -45,6 +50,7 @@
  * @property {Number|String} employee - Employee internal ID of transaction
  * @property {String} percentage - Commission percentage of sales
  * @property {Number|String} bonus - Bonus for increasing sales over previous period
+ * @since cloud360 v1.0.0
  *
  */
 /**
@@ -57,24 +63,28 @@
  * @property {String} PrevCommYearName - Previous commission Year as property string name
  * @property {String} CurrCommYearName - Current commission Year as property string name
  * @property {Number} CurrCommYear - Current commission Year as number
+ * @since cloud360 v1.0.0
  */
 /**
  * @typedef Supervisor
  * @type {Object}
  * @description Object which stores the calculated total sales of a period for a supervisor
  * @property {Number} amount - Total sales amount of managed employees
+ * @since cloud360 v1.0.0
  */
 /**
  * @typedef ManagerSaleTotals
  * @type {Object}
  * @description Object which contains supervisors and their period sale totals
  * @property {Supervisor} ([0-9]+) - Internal ID of supervisor
+ * @since cloud360 v1.0.0
  */
 /**
  * @typedef Sales
  * @type {Object[]}
  * @description Type definition for counting sale transaction totals
  * @property {Number} amount - Sale transaction amount
+ * @since cloud360 v1.0.0
  */
 /**
  * @typedef HighLowCustomer
@@ -82,6 +92,7 @@
  * @description Object consisting of the name of an employees customers name with the most/least total sales and that amount
  * @property {String} name - Name of customer with highest total sale count
  * @property {Number} totalsales - Accumulated total of all sales transactions for customer
+ * @since cloud360 v1.1.0
  *
  */
 /**
@@ -90,12 +101,14 @@
  * @description Object consisting of the name of a customer and sale total for a transaction
  * @property {String} customer - Name of customer on transaction
  * @property {Number} amount - Transaction sale total
+ * @since cloud360 v1.0.0
  *
  */
 /**
  * @typedef CustomerSales
  * @type {CustomerSale[]}
  * @description Array of an employee's customer sales with the customer's name and amount of transaction
+ * @since cloud360 v1.0.0
  */
 
 /**
@@ -106,11 +119,13 @@
  * @param {String} question - Display text for question number
  * @param {String} title - Title of question
  * @param {Object} view - View object for the question
+ * @since cloud360 v1.1.0
  */
 /**
  * @typedef Questions
  * @description List of questions with their titles and views for updating the dom independently
  * @type {Question[]}
+ * @since cloud360 v1.1.0
  */
 
 export const cloud360Types = {};
