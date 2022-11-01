@@ -268,7 +268,7 @@ Array of an employee's customer sales with the customer's name and amount of tra
 <a name="module_cloud360Types..Question"></a>
 
 ### cloud360Types~Question : <code>Object</code>
-Each question has a view object associated with it to display in the dom.
+Each question has a view object associated with it to display in the dom
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
 
@@ -282,7 +282,7 @@ Each question has a view object associated with it to display in the dom.
 <a name="module_cloud360Types..Questions"></a>
 
 ### cloud360Types~Questions : <code>Array.&lt;Question&gt;</code>
-List of questions with their titles and views for updating the dom independently.
+List of questions with their titles and views for updating the dom independently
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
 <a name="module_cloud360-view"></a>

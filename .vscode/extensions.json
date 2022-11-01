@@ -11,6 +11,7 @@
     "robole.markdown-snippets",
     "stevencl.addDocComments",
     "lici.require-js",
-    "Zaczero.bootstrap-v4-snippets"
+    "Zaczero.bootstrap-v4-snippets",
+    "redhat.vscode-yaml"
   ]
 }

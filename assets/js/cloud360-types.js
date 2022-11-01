@@ -100,7 +100,7 @@
 
 /**
  * @typedef Question
- * @description Each question has a view object associated with it to display in the dom.
+ * @description Each question has a view object associated with it to display in the dom
  * @type {Object}
  * @param {Number} internalid - Internal ID for question
  * @param {String} question - Display text for question number
@@ -109,7 +109,7 @@
  */
 /**
  * @typedef Questions
- * @description List of questions with their titles and views for updating the dom independently.
+ * @description List of questions with their titles and views for updating the dom independently
  * @type {Question[]}
  */
 
