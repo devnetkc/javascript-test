@@ -36,7 +36,7 @@
  * @typedef Transactions
  * @type {Object}
  * @property {Transaction[]} 2013 - Sales transactions for 2013
- * @description Object compiled of of yearly revenue streams associated by year as id
+ * @description Object compiled of yearly revenue streams associated by year as id
  */
 /**
  * @typedef CommissionRule
