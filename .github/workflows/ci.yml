@@ -2,7 +2,8 @@
 
 name: Update Documentation
 on: push
-  branches: [ main ]
+  branches:
+      - main
 
 env:
   FORCE_COLOR: 2
