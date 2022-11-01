@@ -1,7 +1,7 @@
 /**
  * @format
  * @module cloud360
- * @version 1.1.0
+ * @version 2.0.0
  */
 import * as cloud360Types from './cloud360-types.js';
 import './cloud360-view.js';
