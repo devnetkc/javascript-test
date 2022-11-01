@@ -556,6 +556,7 @@ const Q1_CalcDaysToBDay = async (emp, Current) => {
 /**
  * @name RenderResults
  * @function
+ * @deprecated - Since v1.1.0 | Use cloud360-view **RenderView** class instead
  * @return {void}
  * @description This renders the raw data to the dom when it is read
  * @summary This method was chosen so that the rest of the page could continue to load while processing logic.
@@ -603,6 +604,7 @@ export const init = async (raw = false) => {
   try {
     await UpdateEmpRecs();
     if (raw) return JSON.stringify(Employees);
+    // Render the raw data on the right hand side for comparison and to see how cards were made
     const RawDataView = new RenderView('raw');
     RawDataView.renderView(Employees, 'raw');
   } catch (err) {
