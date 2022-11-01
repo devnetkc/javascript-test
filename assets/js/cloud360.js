@@ -4,8 +4,7 @@
  * @version 2.0.0
  */
 import * as cloud360Types from './cloud360-types.js';
-import './cloud360-view.js';
-import { RenderView } from './cloud360-view.js';
+import { RenderView } from './cloud360-view.min.js';
 /**
  * @type {cloud360Types.Employee[]}
  * @description Array of employees using Employee record objects
