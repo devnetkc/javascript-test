@@ -29,47 +29,68 @@
             <pre class="prettyprint source linenums"><code>/**
  * @format
  * @module cloud360-view
+ * @version 2.0.0
+ * @since cloud360 v1.1.0
  */
 import * as cloud360Types from './cloud360-types.js';
 /**
  * @class RenderView
  * @description Holds view object for updated employee record and view
- * @param {cloud360Types.Question} question - Question object with its properties
  * @param {String} selector - jQuery selector string for dom element to update view on
  * @property {String} title - Title for view
  * @property {String} question - Question shorthand title
- * @property {Employee} record - Employee object records for question
  * @property {String} tableHeaderTop - Repeated use table header top for cards
  * @property {String} tableHeaderBot - Repeated use table header bottom for cards
  * @property {String} tableBot - Repeated use table bottom for cards
- * @param {String} parent - Parent jQuery selector string for dom element updates
  * @summary Because the tables are being rendered so often, it made sense for parts to be setup as variables
  * which allows them to more easily be reused and modified later.
+ * @since 1.0.0
  */
 export class RenderView {
-    constructor(question, selector, parent) {
-        this.title = question.title;
-        this.question = question.question;
-        this.selector = selector;
-        this.parent = parent;
-        this.tableHeaderTop = `
+  constructor(selector) {
+    this.selector = selector;
+  }
+  /**
+   * @name setCardProperties
+   * @description Sets view properties for rendering a card object
+   * @method
+   * @memberof RenderView
+   * @param {cloud360Types.Question} question - Question object with its properties
+   * @param {String} parent - Parent jQuery selector string for dom element updates
+   * @return {void}
+   * @summary We are separating when/where these properties are set because they are only used for
+   * rendering a card view and not raw data
+   */
+  setCardProperties(question, parent) {
+    this.title = question.title;
+    this.question = question.question;
+    this.parent = parent;
+    this.tableHeaderTop = `
           &lt;div class="table-responsive">
           &lt;table class="table">
             &lt;thead>
               &lt;tr>`;
-        this.tableHeaderBot = `
+    this.tableHeaderBot = `
               &lt;/tr>
             &lt;/thead>
           &lt;tbody>`;
-        this.tableBot = `
+    this.tableBot = `
               &lt;/tbody>
               &lt;/table>
             &lt;/div>`;
-        /** @type {cloud360Types.Employee[]} */
-        this.record = [];
-    }
-    addAccordionCard(data, expand = false) {
-        const Content = `&lt;div class="card">
+  }
+  /**
+   * @name addAccordionCard
+   * @description Creates and renders a new accordion card for a question
+   * @method
+   * @memberof RenderView
+   * @param {Question} data - Data to create a question with
+   * @param {boolean} expand - Set true if this is the first card in the accordion
+   * @return {void}
+   * @since 1.0.0
+   */
+  addAccordionCard(data, expand = false) {
+    const Content = `&lt;div class="card">
             &lt;div class="card-header"
               id="${data.internalid}-${data.question}">
     &lt;h2 class="mb-0">
@@ -91,163 +112,180 @@ export class RenderView {
                   &lt;/div>
               &lt;/div>
           &lt;/div>`;
-        // render the card
-        $(this.parent).append(Content);
+    // render the card
+    $(this.parent).append(Content);
+  }
+  /**
+   * @name renderView
+   * @description Selects which way to render a question and calls that method
+   * @method
+   * @memberof RenderView
+   * @param {Question} data - Data to create a question with
+   * @param {boolean} expand - Set true if this is the first card in the accordion
+   * @return {void}
+   * @summary I chose a switch statement here for rendering a question because there were so many different ways
+   * to change the view, but allowed for a single calling method from outside the class to execute rendering.
+   * @since 2.0.0
+   */
+  renderView(employees, question) {
+    switch (question.question) {
+      case 'Q1':
+        this.renderQ1(employees);
+        break;
+      case 'Q2':
+        this.renderPerformanceQ(employees);
+        break;
+      case 'Q3P1':
+        this.renderQ3(employees);
+        break;
+      case 'Q3P2':
+        this.renderQ3(employees, true);
+        break;
+      case 'Q4':
+        this.renderQ4(employees);
+        break;
+      case 'Q5P1':
+        this.renderQ5(employees);
+        break;
+      case 'Q5P2':
+        this.renderPerformanceQ(employees, true);
+        break;
+      default:
+        $(`#pre-${question}`).html(JSON.stringify(employees, null, '\t'));
     }
-    addRecord(value) {
-        this.record.push(value);
-    }
-    render(employees, question) {
-            switch (question.question) {
-                case 'Q1':
-                    this.renderQ1(employees);
-                    break;
-                case 'Q2':
-                    this.renderPerformanceQ(employees);
-                    break;
-                case 'Q3P1':
-                    this.renderQ3(employees);
-                    break;
-                case 'Q3P2':
-                    this.renderQ3(employees, true);
-                    break;
-                case 'Q4':
-                    this.renderQ4(employees);
-                    break;
-                case 'Q5P1':
-                    this.renderQ5(employees);
-                    break;
-                case 'Q5P2':
-                    this.renderPerformanceQ(employees, true);
-                    break;
-                default:
-                    $(`#pre-${this.question}`).html(
-                        JSON.stringify(this.record, null, '\t')
-                    );
-            }
-        }
-        /**
-         * @name renderQ1
-         * @method
-         * @protected
-         * @description Renders results for question 1
-         * @param {Employee[]} employees
-         * @return {void}
-         */
-    renderQ1(employees) {
-            let content = `${this.tableHeaderTop}
+  }
+  /**
+   * @name renderQ1
+   * @method
+   * @memberof RenderView
+   * @protected
+   * @description Renders results for question 1
+   * @param {Employee[]} employees
+   * @return {void}
+   * @since 1.0.0
+   */
+  renderQ1(employees) {
+    let content = `${this.tableHeaderTop}
             &lt;th scope="col">Employee&lt;/th>
             &lt;th scope="col">Days to Birthday&lt;/th>
             &lt;th scope="col">Birthday&lt;/th>
             ${this.tableHeaderBot}`;
-            employees.forEach(employee => {
-                content += `
+    employees.forEach(employee => {
+      content += `
           &lt;tr>
             &lt;td>${employee.name}&lt;/td>
             &lt;td>${employee.daystobday}&lt;/td>
             &lt;td>${employee.birthdate}&lt;/td>
           &lt;/tr>`;
-            });
-            content += this.tableBot;
-            $(`#body-${this.question}`).html(content);
-        }
-        /**
-         * @name renderQ3
-         * @method
-         * @protected
-         * @description Renders results for question 3
-         * @param {Employee[]} employees
-         * @param {boolean} p2=false - Calculate for managers instead
-         * @return {void}
-         */
-    renderQ3(employees, p2 = false) {
-            let content = `${this.tableHeaderTop}
+    });
+    content += this.tableBot;
+    $(`#body-${this.question}`).html(content);
+  }
+  /**
+   * @name renderQ3
+   * @method
+   * @memberof RenderView
+   * @protected
+   * @description Renders results for question 3
+   * @param {Employee[]} employees
+   * @param {boolean} p2=false - Calculate for managers instead
+   * @return {void}
+   * @since 1.0.0
+   */
+  renderQ3(employees, p2 = false) {
+    let content = `${this.tableHeaderTop}
             &lt;th scope="col">Employee&lt;/th>
             &lt;th scope="col">2013 Revenue&lt;/th>
             ${this.tableHeaderBot}`;
-            for (const Emp of employees) {
-                // We don't wan to see supervisors for this one
-                if (Emp.supervisor === '' &amp;&amp; !p2) continue;
-                // We don't wan to see reg employees for this one
-                if (Emp.supervisor !== '' &amp;&amp; p2) continue;
-                content += `
+    for (const Emp of employees) {
+      // We don't wan to see supervisors for this one
+      if (Emp.supervisor === '' &amp;&amp; !p2) continue;
+      // We don't wan to see reg employees for this one
+      if (Emp.supervisor !== '' &amp;&amp; p2) continue;
+      content += `
           &lt;tr>
             &lt;td>${Emp.name}&lt;/td>
             &lt;td>${Emp['2013 Revenue']}&lt;/td>
           &lt;/tr>`;
-            }
-            content += this.tableBot;
-            $(`#body-${this.question}`).html(content);
-        }
-        /**
-         * @name renderQ4
-         * @method
-         * @protected
-         * @description Renders results for question 4
-         * @param {Employee[]} employees
-         * @return {void}
-         */
-    renderQ4(employees) {
-            let content = `${this.tableHeaderTop}
+    }
+    content += this.tableBot;
+    $(`#body-${this.question}`).html(content);
+  }
+  /**
+   * @name renderQ4
+   * @method
+   * @memberof RenderView
+   * @protected
+   * @description Renders results for question 4
+   * @param {Employee[]} employees
+   * @return {void}
+   * @since 1.0.0
+   */
+  renderQ4(employees) {
+    let content = `${this.tableHeaderTop}
               &lt;th scope="col">Employee&lt;/th>
               &lt;th scope="col">2013 Commission&lt;/th>
             ${this.tableHeaderBot}`;
-            employees.forEach(employee => {
-                content += `
+    employees.forEach(employee => {
+      content += `
             &lt;tr>
               &lt;td>${employee.name}&lt;/td>
               &lt;td>${employee.commission}&lt;/td>
             &lt;/tr>`;
-            });
-            content += this.tableBot;
-            $(`#body-${this.question}`).html(content);
-        }
-        /**
-         * @name renderQ5
-         * @method
-         * @protected
-         * @description Renders results for question 5
-         * @param {Employee[]} employees
-         * @return {void}
-         */
-    renderQ5(employees) {
-            let content = `${this.tableHeaderTop}
+    });
+    content += this.tableBot;
+    $(`#body-${this.question}`).html(content);
+  }
+  /**
+   * @name renderQ5
+   * @method
+   * @memberof RenderView
+   * @protected
+   * @description Renders results for question 5
+   * @param {Employee[]} employees
+   * @return {void}
+   * @since 1.0.0
+   */
+  renderQ5(employees) {
+    let content = `${this.tableHeaderTop}
               &lt;th scope="col">Employee&lt;/th>
               &lt;th scope="col">Last Sale Date&lt;/th>
               &lt;th scope="col">Days Without a Sale&lt;/th>
               ${this.tableHeaderBot}`;
-            employees.forEach(employee => {
-                content += `
+    employees.forEach(employee => {
+      content += `
               &lt;tr>
                 &lt;td>${employee.name}&lt;/td>
                 &lt;td>${employee.lastsaledate}&lt;/td>
                 &lt;td>${employee.dayssincesale}&lt;/td>
               &lt;/tr>`;
-            });
-            content += this.tableBot;
-            $(`#body-${this.question}`).html(content);
-        }
-        /**
-         * @name renderPerformanceQ
-         * @method
-         * @protected
-         * @description Renders results for question 2 &amp; 5 Part2 -- Based on Question 2
-         * @param {Employee[]} employees
-         * @param {boolean} worst=false - View for worst performing customer T/F
-         * @return {void}
-         */
-    renderPerformanceQ(employees, worst = false) {
-        let content = `${this.tableHeaderTop}
+    });
+    content += this.tableBot;
+    $(`#body-${this.question}`).html(content);
+  }
+  /**
+   * @name renderPerformanceQ
+   * @method
+   * @memberof RenderView
+   * @protected
+   * @description Renders results for question 2 &amp; 5 Part2 -- Based on Question 2
+   * @param {Employee[]} employees
+   * @param {boolean} worst=false - View for worst performing customer T/F
+   * @return {void}
+   * @since 1.0.0
+   */
+  renderPerformanceQ(employees, worst = false) {
+    let content = `${this.tableHeaderTop}
           &lt;th scope="col">Employee&lt;/th>
           &lt;th scope="col">Customer&lt;/th>
           &lt;th scope="col">Customer Total for Year&lt;/th>
           ${this.tableHeaderBot}`;
-        for (const Emp of employees) {
-            // We don't wan to see supervisors for this one
-            if (!worst &amp;&amp; Emp.bestcustomer.totalsales &lt;= 0) continue;
-            // We don't wan to see supervisors for this one
-            if (worst &amp;&amp; Emp.worstperforming.totalsales &lt;= 0) continue;
-            content += `
+    for (const Emp of employees) {
+      // We don't wan to see supervisors for this one
+      if (!worst &amp;&amp; Emp.bestcustomer.totalsales &lt;= 0) continue;
+      // We don't wan to see supervisors for this one
+      if (worst &amp;&amp; Emp.worstperforming.totalsales &lt;= 0) continue;
+      content += `
               &lt;tr>
                 &lt;td>${Emp.name}&lt;/td>
                 &lt;td>${
@@ -259,11 +297,12 @@ export class RenderView {
                     : Emp.bestcustomer.totalsales
                 }&lt;/td>
               &lt;/tr>`;
-        }
-        content += this.tableBot;
-        $(`#body-${this.question}`).html(content);
     }
-}</code></pre>
+    content += this.tableBot;
+    $(`#body-${this.question}`).html(content);
+  }
+}
+</code></pre>
         </article>
     </section>
 
@@ -279,7 +318,7 @@ export class RenderView {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Nov 01 2022 12:36:33 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Nov 01 2022 18:30:33 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -98,6 +98,8 @@ Explain what tools were used during this practice - what program did you use to 
 Type definitions for Cloud 360 JavaScript Test
 
 **Format**:   
+**Since**: cloud360 v1.1.0  
+**Version**: 1.0.0  
 
 * [cloud360Types](#module_cloud360Types)
     * [~Employee](#module_cloud360Types..Employee) : <code>Object</code>
@@ -120,6 +122,7 @@ Type definitions for Cloud 360 JavaScript Test
 Employee record object
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -144,6 +147,7 @@ Employee record object
 Sales transaction record object
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -160,6 +164,7 @@ Sales transaction record object
 Object compiled of yearly revenue streams associated by year as id
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -172,6 +177,7 @@ Object compiled of yearly revenue streams associated by year as id
 Object of commission rules which are applicable calculating commission earned for an employee
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -186,6 +192,7 @@ Object of commission rules which are applicable calculating commission earned fo
 Object which contains current date properties for updating records
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -203,6 +210,7 @@ Object which contains current date properties for updating records
 Object which stores the calculated total sales of a period for a supervisor
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -215,6 +223,7 @@ Object which stores the calculated total sales of a period for a supervisor
 Object which contains supervisors and their period sale totals
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -227,6 +236,7 @@ Object which contains supervisors and their period sale totals
 Type definition for counting sale transaction totals
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -239,6 +249,7 @@ Type definition for counting sale transaction totals
 Object consisting of the name of an employees customers name with the most/least total sales and that amount
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.1.0  
 **Properties**
 
 | Name | Type | Description |
@@ -252,6 +263,7 @@ Object consisting of the name of an employees customers name with the most/least
 Object consisting of the name of a customer and sale total for a transaction
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 **Properties**
 
 | Name | Type | Description |
@@ -265,12 +277,14 @@ Object consisting of the name of a customer and sale total for a transaction
 Array of an employee's customer sales with the customer's name and amount of transaction
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.0.0  
 <a name="module_cloud360Types..Question"></a>
 
 ### cloud360Types~Question : <code>Object</code>
 Each question has a view object associated with it to display in the dom
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.1.0  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -285,19 +299,17 @@ Each question has a view object associated with it to display in the dom
 List of questions with their titles and views for updating the dom independently
 
 **Kind**: inner typedef of [<code>cloud360Types</code>](#module_cloud360Types)  
+**Since**: cloud360 v1.1.0  
 <a name="module_cloud360-view"></a>
 
 ## cloud360-view
 **Format**:   
+**Since**: cloud360 v1.1.0  
+**Version**: 2.0.0  
 
 * [cloud360-view](#module_cloud360-view)
     * [~RenderView](#module_cloud360-view..RenderView)
-        * [new RenderView(question, selector, parent)](#new_module_cloud360-view..RenderView_new)
-    * [~renderQ1(employees)](#module_cloud360-view..renderQ1) ⇒ <code>void</code>
-    * [~renderQ3(employees, p2)](#module_cloud360-view..renderQ3) ⇒ <code>void</code>
-    * [~renderQ4(employees)](#module_cloud360-view..renderQ4) ⇒ <code>void</code>
-    * [~renderQ5(employees)](#module_cloud360-view..renderQ5) ⇒ <code>void</code>
-    * [~renderPerformanceQ(employees, worst)](#module_cloud360-view..renderPerformanceQ) ⇒ <code>void</code>
+        * [new RenderView(selector)](#new_module_cloud360-view..RenderView_new)
 
 <a name="module_cloud360-view..RenderView"></a>
 
@@ -305,95 +317,32 @@ List of questions with their titles and views for updating the dom independently
 **Kind**: inner class of [<code>cloud360-view</code>](#module_cloud360-view)  
 **Summary**: Because the tables are being rendered so often, it made sense for parts to be setup as variables
 which allows them to more easily be reused and modified later.  
+**Since**: 1.0.0  
 **Properties**
 
 | Name | Type | Description |
 | --- | --- | --- |
 | title | <code>String</code> | Title for view |
 | question | <code>String</code> | Question shorthand title |
-| record | <code>Employee</code> | Employee object records for question |
 | tableHeaderTop | <code>String</code> | Repeated use table header top for cards |
 | tableHeaderBot | <code>String</code> | Repeated use table header bottom for cards |
 | tableBot | <code>String</code> | Repeated use table bottom for cards |
 
 <a name="new_module_cloud360-view..RenderView_new"></a>
 
-#### new RenderView(question, selector, parent)
+#### new RenderView(selector)
 Holds view object for updated employee record and view
 
 
 | Param | Type | Description |
 | --- | --- | --- |
-| question | <code>cloud360Types.Question</code> | Question object with its properties |
 | selector | <code>String</code> | jQuery selector string for dom element to update view on |
-| parent | <code>String</code> | Parent jQuery selector string for dom element updates |
-
-<a name="module_cloud360-view..renderQ1"></a>
-
-### cloud360-view~renderQ1(employees) ⇒ <code>void</code>
-Renders results for question 1
-
-**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
-**Access**: protected  
-
-| Param | Type |
-| --- | --- |
-| employees | <code>Array.&lt;Employee&gt;</code> | 
-
-<a name="module_cloud360-view..renderQ3"></a>
-
-### cloud360-view~renderQ3(employees, p2) ⇒ <code>void</code>
-Renders results for question 3
-
-**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
-**Access**: protected  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| employees | <code>Array.&lt;Employee&gt;</code> |  |  |
-| p2 | <code>boolean</code> | <code>false</code> | Calculate for managers instead |
-
-<a name="module_cloud360-view..renderQ4"></a>
-
-### cloud360-view~renderQ4(employees) ⇒ <code>void</code>
-Renders results for question 4
-
-**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
-**Access**: protected  
-
-| Param | Type |
-| --- | --- |
-| employees | <code>Array.&lt;Employee&gt;</code> | 
-
-<a name="module_cloud360-view..renderQ5"></a>
-
-### cloud360-view~renderQ5(employees) ⇒ <code>void</code>
-Renders results for question 5
-
-**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
-**Access**: protected  
-
-| Param | Type |
-| --- | --- |
-| employees | <code>Array.&lt;Employee&gt;</code> | 
-
-<a name="module_cloud360-view..renderPerformanceQ"></a>
-
-### cloud360-view~renderPerformanceQ(employees, worst) ⇒ <code>void</code>
-Renders results for question 2 & 5 Part2 -- Based on Question 2
-
-**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
-**Access**: protected  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| employees | <code>Array.&lt;Employee&gt;</code> |  |  |
-| worst | <code>boolean</code> | <code>false</code> | View for worst performing customer T/F |
 
 <a name="module_cloud360"></a>
 
 ## cloud360
 **Format**:   
+**Version**: 2.0.0  
 
 * [cloud360](#module_cloud360)
     * _static_
@@ -409,7 +358,7 @@ Renders results for question 2 & 5 Part2 -- Based on Question 2
         * [~Q3_UpdateSalesTotals(year, sales, emp)](#module_cloud360..Q3_UpdateSalesTotals) ⇒ <code>Number</code>
         * [~Q2_SetBestCustomer(empSales, worst)](#module_cloud360..Q2_SetBestCustomer) ⇒ <code>Promise</code>
         * [~Q1_CalcDaysToBDay(emp, Current)](#module_cloud360..Q1_CalcDaysToBDay) ⇒ <code>Number</code>
-        * [~RenderResults()](#module_cloud360..RenderResults) ⇒ <code>void</code>
+        * ~~[~RenderResults()](#module_cloud360..RenderResults) ⇒ <code>void</code>~~
 
 <a name="module_cloud360.init"></a>
 
@@ -425,6 +374,7 @@ and just render our results to the dom now and return.
 We are also exporting init as our only public accessible function. Where the method can be called by the browser,
 or we can call this using the markdown true and get a return string of what this renders for use in other
 parts of the project (like the markdown/readme).  
+**Since**: 1.0.0  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -436,16 +386,23 @@ parts of the project (like the markdown/readme).
 Array of employees using Employee record objects
 
 **Kind**: inner constant of [<code>cloud360</code>](#module_cloud360)  
+**Since**: 1.0.0  
 <a name="module_cloud360..Revenue"></a>
 
 ### cloud360~Revenue : <code>cloud360Types.Transactions</code>
+Object with a property of year which is an array of transaction objects for given period
+
 **Kind**: inner constant of [<code>cloud360</code>](#module_cloud360)  
+**Summary**: We broke the year away as a property instead of the provided variable because in the real world we
+would not just be dealing with a single year here.  We would have some way of selecting the year we want to fetch data for.  
+**Since**: 1.0.0  
 <a name="module_cloud360..CommissionRules"></a>
 
 ### cloud360~CommissionRules : <code>Array.&lt;cloud360Types.CommissionRule&gt;</code>
 Array of CommissionRule records for calculating employee commissions for a sales period
 
 **Kind**: inner constant of [<code>cloud360</code>](#module_cloud360)  
+**Since**: 1.0.0  
 <a name="module_cloud360..UpdateEmpRec"></a>
 
 ### cloud360~UpdateEmpRec(year) ⇒ <code>Promise</code>
@@ -455,6 +412,7 @@ Creates new properties on Employees Object to store calculated values
 **Summary**: This method was created to initiate the business logic updates.  
 **Fulfill**: <code>void</code>  
 **Reject**: <code>void</code>  
+**Since**: 1.1.0  
 
 | Param | Type |
 | --- | --- |
@@ -469,10 +427,11 @@ Calculates the number of days since an employee had a sale
 **Summary**: This number is usually quite handy to have in business from a CRM standpoint.
 This allows a companies sales team to focus in worker productivity, or could be converted to last sale date
 for a customer, so sales can reach out to their customers to try and bring them back in.  
+**Since**: 1.0.0  
 
 | Param | Type |
 | --- | --- |
-| emp | <code>Employee</code> | 
+| emp | <code>cloud360.Employee</code> | 
 | Current | <code>Current</code> | 
 
 <a name="module_cloud360..Q4_SetCommissions"></a>
@@ -481,10 +440,11 @@ for a customer, so sales can reach out to their customers to try and bring them 
 Calculates the sales commission earned and applies it to the Employee record object
 
 **Kind**: inner method of [<code>cloud360</code>](#module_cloud360)  
+**Since**: 1.0.0  
 
 | Param | Type |
 | --- | --- |
-| emp | <code>Employee</code> | 
+| emp | <code>cloud360.Employee</code> | 
 | Current | <code>Current</code> | 
 
 <a name="module_cloud360..Q3P2_UpdateSalesTotals"></a>
@@ -493,6 +453,7 @@ Calculates the sales commission earned and applies it to the Employee record obj
 Updates sale totals for supervisors
 
 **Kind**: inner method of [<code>cloud360</code>](#module_cloud360)  
+**Since**: 1.0.0  
 
 | Param | Type |
 | --- | --- |
@@ -505,12 +466,13 @@ Updates sale totals for supervisors
 Updates employee sales totals for a period.  Returns sales for use in manager totals.
 
 **Kind**: inner method of [<code>cloud360</code>](#module_cloud360)  
+**Since**: 1.0.0  
 
 | Param | Type |
 | --- | --- |
 | year | <code>String</code> | 
 | sales | <code>Sales</code> | 
-| emp | <code>Employee</code> | 
+| emp | <code>cloud360.Employee</code> | 
 
 <a name="module_cloud360..Q2_SetBestCustomer"></a>
 
@@ -524,6 +486,7 @@ filters down sales by employee, calculates each customers total sales, then sele
 the highest total sale amount as the best customer.  
 **Fulfill**: <code>HighLowCustomer</code> - Object with name and total sales of highest or lowest customer  
 **Reject**: <code>Object</code> - Error object returned  
+**Since**: 1.0.0  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -536,20 +499,24 @@ the highest total sale amount as the best customer.
 Returns number of days until an employees next birthday
 
 **Kind**: inner method of [<code>cloud360</code>](#module_cloud360)  
+**Since**: 1.0.0  
 
 | Param | Type |
 | --- | --- |
-| emp | <code>Employee</code> | 
+| emp | <code>cloud360.Employee</code> | 
 | Current | <code>Current</code> | 
 
 <a name="module_cloud360..RenderResults"></a>
 
-### cloud360~RenderResults() ⇒ <code>void</code>
+### ~~cloud360~RenderResults() ⇒ <code>void</code>~~
+***Deprecated***
+
 This renders the raw data to the dom when it is read
 
 **Kind**: inner method of [<code>cloud360</code>](#module_cloud360)  
 **Summary**: This method was chosen so that the rest of the page could continue to load while processing logic.
 While there isn't a lot going on in this demo, on a normal site, we would want to control how/when we update the dom as data is ready.  
+**Since**: 1.0.0  
 
 ## Copyright
 
