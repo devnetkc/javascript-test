@@ -1,7 +1,7 @@
 /**
  * @format
  * @module cloud360-view
- * @version 2.0.0
+ * @version 2.0.1
  * @since cloud360 v1.1.0
  */
 import * as cloud360Types from './cloud360-types.js';
@@ -26,7 +26,6 @@ export class RenderView {
    * @name setCardProperties
    * @description Sets view properties for rendering a card object
    * @method
-   * @memberof RenderView
    * @param {cloud360Types.Question} question - Question object with its properties
    * @param {String} parent - Parent jQuery selector string for dom element updates
    * @return {void}
@@ -55,7 +54,6 @@ export class RenderView {
    * @name addAccordionCard
    * @description Creates and renders a new accordion card for a question
    * @method
-   * @memberof RenderView
    * @param {Question} data - Data to create a question with
    * @param {boolean} expand - Set true if this is the first card in the accordion
    * @return {void}
@@ -91,7 +89,6 @@ export class RenderView {
    * @name renderView
    * @description Selects which way to render a question and calls that method
    * @method
-   * @memberof RenderView
    * @param {Question} data - Data to create a question with
    * @param {boolean} expand - Set true if this is the first card in the accordion
    * @return {void}
@@ -129,7 +126,6 @@ export class RenderView {
   /**
    * @name renderQ1
    * @method
-   * @memberof RenderView
    * @protected
    * @description Renders results for question 1
    * @param {Employee[]} employees
@@ -156,7 +152,6 @@ export class RenderView {
   /**
    * @name renderQ3
    * @method
-   * @memberof RenderView
    * @protected
    * @description Renders results for question 3
    * @param {Employee[]} employees
@@ -186,7 +181,6 @@ export class RenderView {
   /**
    * @name renderQ4
    * @method
-   * @memberof RenderView
    * @protected
    * @description Renders results for question 4
    * @param {Employee[]} employees
@@ -211,7 +205,6 @@ export class RenderView {
   /**
    * @name renderQ5
    * @method
-   * @memberof RenderView
    * @protected
    * @description Renders results for question 5
    * @param {Employee[]} employees
@@ -238,7 +231,6 @@ export class RenderView {
   /**
    * @name renderPerformanceQ
    * @method
-   * @memberof RenderView
    * @protected
    * @description Renders results for question 2 & 5 Part2 -- Based on Question 2
    * @param {Employee[]} employees
