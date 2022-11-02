@@ -31,6 +31,9 @@
 Be sure to have [Node.js](https://nodejs.org/) installed before proceeding. **Node v16 is recommended and was used to compile project**
 
 ```shell
+# Install dependencies
+npm i
+
 # Compile Sass
 npm run css-compile
 
@@ -305,11 +308,19 @@ List of questions with their titles and views for updating the dom independently
 ## cloud360-view
 **Format**:   
 **Since**: cloud360 v1.1.0  
-**Version**: 2.0.0  
+**Version**: 2.0.1  
 
 * [cloud360-view](#module_cloud360-view)
     * [~RenderView](#module_cloud360-view..RenderView)
         * [new RenderView(selector)](#new_module_cloud360-view..RenderView_new)
+    * [~setCardProperties(question, parent)](#module_cloud360-view..setCardProperties) ⇒ <code>void</code>
+    * [~addAccordionCard(data, expand)](#module_cloud360-view..addAccordionCard) ⇒ <code>void</code>
+    * [~renderView(data, expand)](#module_cloud360-view..renderView) ⇒ <code>void</code>
+    * [~renderQ1(employees)](#module_cloud360-view..renderQ1) ⇒ <code>void</code>
+    * [~renderQ3(employees, p2)](#module_cloud360-view..renderQ3) ⇒ <code>void</code>
+    * [~renderQ4(employees)](#module_cloud360-view..renderQ4) ⇒ <code>void</code>
+    * [~renderQ5(employees)](#module_cloud360-view..renderQ5) ⇒ <code>void</code>
+    * [~renderPerformanceQ(employees, worst)](#module_cloud360-view..renderPerformanceQ) ⇒ <code>void</code>
 
 <a name="module_cloud360-view..RenderView"></a>
 
@@ -337,6 +348,115 @@ Holds view object for updated employee record and view
 | Param | Type | Description |
 | --- | --- | --- |
 | selector | <code>String</code> | jQuery selector string for dom element to update view on |
+
+<a name="module_cloud360-view..setCardProperties"></a>
+
+### cloud360-view~setCardProperties(question, parent) ⇒ <code>void</code>
+Sets view properties for rendering a card object
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Summary**: We are separating when/where these properties are set because they are only used for
+rendering a card view and not raw data  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| question | <code>cloud360Types.Question</code> | Question object with its properties |
+| parent | <code>String</code> | Parent jQuery selector string for dom element updates |
+
+<a name="module_cloud360-view..addAccordionCard"></a>
+
+### cloud360-view~addAccordionCard(data, expand) ⇒ <code>void</code>
+Creates and renders a new accordion card for a question
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Since**: 1.0.0  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | <code>Question</code> | Data to create a question with |
+| expand | <code>boolean</code> | Set true if this is the first card in the accordion |
+
+<a name="module_cloud360-view..renderView"></a>
+
+### cloud360-view~renderView(data, expand) ⇒ <code>void</code>
+Selects which way to render a question and calls that method
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Summary**: I chose a switch statement here for rendering a question because there were so many different ways
+to change the view, but allowed for a single calling method from outside the class to execute rendering.  
+**Since**: 2.0.0  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | <code>Question</code> | Data to create a question with |
+| expand | <code>boolean</code> | Set true if this is the first card in the accordion |
+
+<a name="module_cloud360-view..renderQ1"></a>
+
+### cloud360-view~renderQ1(employees) ⇒ <code>void</code>
+Renders results for question 1
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+**Since**: 1.0.0  
+
+| Param | Type |
+| --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> | 
+
+<a name="module_cloud360-view..renderQ3"></a>
+
+### cloud360-view~renderQ3(employees, p2) ⇒ <code>void</code>
+Renders results for question 3
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+**Since**: 1.0.0  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> |  |  |
+| p2 | <code>boolean</code> | <code>false</code> | Calculate for managers instead |
+
+<a name="module_cloud360-view..renderQ4"></a>
+
+### cloud360-view~renderQ4(employees) ⇒ <code>void</code>
+Renders results for question 4
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+**Since**: 1.0.0  
+
+| Param | Type |
+| --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> | 
+
+<a name="module_cloud360-view..renderQ5"></a>
+
+### cloud360-view~renderQ5(employees) ⇒ <code>void</code>
+Renders results for question 5
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+**Since**: 1.0.0  
+
+| Param | Type |
+| --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> | 
+
+<a name="module_cloud360-view..renderPerformanceQ"></a>
+
+### cloud360-view~renderPerformanceQ(employees, worst) ⇒ <code>void</code>
+Renders results for question 2 & 5 Part2 -- Based on Question 2
+
+**Kind**: inner method of [<code>cloud360-view</code>](#module_cloud360-view)  
+**Access**: protected  
+**Since**: 1.0.0  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| employees | <code>Array.&lt;Employee&gt;</code> |  |  |
+| worst | <code>boolean</code> | <code>false</code> | View for worst performing customer T/F |
 
 <a name="module_cloud360"></a>
 
