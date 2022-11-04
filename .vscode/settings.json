@@ -27,5 +27,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
-  "es6-css-minify.minifyOnSave": "exists"
+  "es6-css-minify.minifyOnSave": "exists",
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"]
 }

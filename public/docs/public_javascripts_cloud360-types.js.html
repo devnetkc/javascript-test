@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: public/javascripts/cloud360-types.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: public/javascripts/cloud360-types.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @format
+ * @module cloud360Types
+ * @description Type definitions for Cloud 360 JavaScript Test
+ * @version 1.0.0
+ * @since cloud360 v1.1.0
+ */
+/**
+ * @typedef Employee
+ * @type {Object}
+ * @description Employee record object
+ * @property {String} internalid - Employee internal ID
+ * @property {String} name - Employee name
+ * @property {String} email - Employee email
+ * @property {Date} birthdate - Employee birthday
+ * @property {Number} supervisor - Employee supervisor internal id
+ * @property {Number} 2012 Revenue - Total of sales in 2012
+ * @property {Number} 2013 Revenue - Total of sales in 2013
+ * @property {Number} daystobday - Number of days until employee birthday
+ * @property {HighLowCustomer} bestcustomer - Best customer for employee
+ * @property {Number} commission - Sales commission earned for previous sales period
+ * @property {Number|String} dayssincesale - Number of days since last sale -- N/A if no sales for period
+ * @property {String} lastsaledate - Date of previous sale as string -- N/A if no sales for period
+ * @property {HighLowCustomer} worstperforming - Performance stats for lowest performing customer for employee
+ * @since cloud360 v1.0.0
+ */
+/**
+ * @typedef Transaction
+ * @type {Object}
+ * @description Sales transaction record object
+ * @property {String} type - Type of transaction
+ * @property {String} customer - Transaction customer name
+ * @property {Number|String} Employee - Employee internal ID of transaction
+ * @property {Number|String} amount - Transaction total
+ * @property {String} saledate - Date of transaction
+ * @since cloud360 v1.0.0
+ *
+ */
+/**
+ * @typedef Transactions
+ * @type {Object}
+ * @property {Transaction[]} 2013 - Sales transactions for 2013
+ * @description Object compiled of yearly revenue streams associated by year as id
+ * @since cloud360 v1.0.0
+ */
+/**
+ * @typedef CommissionRule
+ * @type {Object}
+ * @description Object of commission rules which are applicable calculating commission earned for an employee
+ * @property {Number|String} employee - Employee internal ID of transaction
+ * @property {String} percentage - Commission percentage of sales
+ * @property {Number|String} bonus - Bonus for increasing sales over previous period
+ * @since cloud360 v1.0.0
+ *
+ */
+/**
+ * @typedef Current
+ * @type {Object}
+ * @description Object which contains current date properties for updating records
+ * @property {Date} CurDate - Current Date
+ * @property {Date} CurMonth - Current Month
+ * @property {Date} CurYear - Current Year
+ * @property {String} PrevCommYearName - Previous commission Year as property string name
+ * @property {String} CurrCommYearName - Current commission Year as property string name
+ * @property {Number} CurrCommYear - Current commission Year as number
+ * @since cloud360 v1.0.0
+ */
+/**
+ * @typedef Supervisor
+ * @type {Object}
+ * @description Object which stores the calculated total sales of a period for a supervisor
+ * @property {Number} amount - Total sales amount of managed employees
+ * @since cloud360 v1.0.0
+ */
+/**
+ * @typedef ManagerSaleTotals
+ * @type {Object}
+ * @description Object which contains supervisors and their period sale totals
+ * @property {Supervisor} ([0-9]+) - Internal ID of supervisor
+ * @since cloud360 v1.0.0
+ */
+/**
+ * @typedef Sales
+ * @type {Object[]}
+ * @description Type definition for counting sale transaction totals
+ * @property {Number} amount - Sale transaction amount
+ * @since cloud360 v1.0.0
+ */
+/**
+ * @typedef HighLowCustomer
+ * @type {Object}
+ * @description Object consisting of the name of an employees customers name with the most/least total sales and that amount
+ * @property {String} name - Name of customer with highest total sale count
+ * @property {Number} totalsales - Accumulated total of all sales transactions for customer
+ * @since cloud360 v1.1.0
+ *
+ */
+/**
+ * @typedef CustomerSale
+ * @type {Object}
+ * @description Object consisting of the name of a customer and sale total for a transaction
+ * @property {String} customer - Name of customer on transaction
+ * @property {Number} amount - Transaction sale total
+ * @since cloud360 v1.0.0
+ *
+ */
+/**
+ * @typedef CustomerSales
+ * @type {CustomerSale[]}
+ * @description Array of an employee's customer sales with the customer's name and amount of transaction
+ * @since cloud360 v1.0.0
+ */
+
+/**
+ * @typedef Question
+ * @description Each question has a view object associated with it to display in the dom
+ * @type {Object}
+ * @param {Number} internalid - Internal ID for question
+ * @param {String} question - Display text for question number
+ * @param {String} title - Title of question
+ * @param {Object} view - View object for the question
+ * @since cloud360 v1.1.0
+ */
+/**
+ * @typedef Questions
+ * @description List of questions with their titles and views for updating the dom independently
+ * @type {Question[]}
+ * @since cloud360 v1.1.0
+ */
+
+export const cloud360Types = {};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cloud360.html">cloud360</a></li><li><a href="module-cloud360-view.html">cloud360-view</a></li><li><a href="module-cloud360Types.html">cloud360Types</a></li></ul><h3>Classes</h3><ul><li><a href="module-cloud360-view-RenderView.html">RenderView</a></li></ul><h3>Global</h3><ul><li><a href="global.html#express">express</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Fri Nov 04 2022 15:06:16 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
